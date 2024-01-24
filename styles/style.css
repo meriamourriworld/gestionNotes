@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Guntur:wght@300&family=Wallpoet&display=swap&family=Montserrat:wght@100;200;400;600&family=Raleway:wght@200;500&display=swap');
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*********************************ERROR PAGE*********************************/
+.mainErrPage
+{
+    width: 100%;
+    height: 100vh;
+    background: url("../images/errBackground.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+}
+.errorContainer
+{
+    background-color: #dc3546d6;
+    width: 50%;
+    height: max-content;
+    padding: 10px;
+    border-radius: 10px;
+}
+.headerConnection
+{
+    background-color: #340448;
+    width: 100%;
+    height: 100px;
+}
+.logo
+{
+    font-family: 'Wallpoet', sans-serif;
+    color: #dc3546;
+}
+.logo h6
+{
+    font-size: 0.9em;
+}
+.mainConnection
+{
+    width: 80%;
+    height: 100vh;
+}
+.wallLogin
+{
+    width: 60%;
+    height: 100%;
+    background: url("../images/loginBackground1.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.formLogin
+{
+    background-color: #340448;
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+}
+.btn-reg
+{
+    background-color: #dc3546;
+}
