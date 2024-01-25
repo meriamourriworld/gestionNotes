@@ -1,24 +1,53 @@
 <?php 
-    $servername = "localhost";
-    $db = "gestionnotes";
-    $username = "root";
-    $pass = "";
+   include_once("connectDb.php");
 
-    try
+    $errMsg = "";
+    if($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        $con = new PDO("mysql:host=$servername; dbname=$db;", $username, $pass);
-        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $login = $_POST["login"];
+        $password = $_POST["pass"];
 
 
 
 
 
-    }catch(PDOEXCEPTION $e)
-    {
-        $error = "Une erreur est survenue " . $e->getMessage();
-        header("location:errorPage.php?msg=$error");
+
+        $getUserReq = "select * from utilisateur where identifiant='".$login."';";
+        $getUserRes = $con->query($getUserReq);
+        if($getUserRes->rowcount() > 0)
+        {
+            $user = $getUserRes->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($password, $user["motPasse"]))
+            {
+                //Enregistrer les données de session
+                $_SESSION["loggedin"] = true;
+                $_SESSION["username"] = $login;
+                setcookie("currentUser", $login, time() + (86400 * 30), "/");
+
+                //Redirection de l'utiisateur vers sa page d'accueil en fonction de son role
+                if($user["role"] == "admin")
+                {
+                    echo("bienvenue admin");
+                }
+                else if ($user["role"] == "professeur") {
+                    echo("bienvenue professeur");
+
+                } else if ($user["role"] == "etudiant") {
+                    echo("bienvenue etudiant");
+
+                }
+            }else
+            {
+                //Mot de passe incorrect
+                $errMsg = "Mot de passe incorrect";
+
+            }
+        }else
+        {
+            //Aucun utilisateur attribué à cet identifiant
+            $errMsg = "Aucun utilisateur attribué à cet identifiant";
+        }
     }
-
 
 ?>
 
@@ -49,6 +78,10 @@
                     <input type="password" class="form-control p-3" name="pass" id="pass" required>
 
                     <input type="submit" value="Se connecter" class="btn btn-reg w-100 mt-4 p-3 text-white">
+
+                    <div class="alert error mt-4">
+                        <?php echo $errMsg; ?>
+                    </div>
                 </form>
             </div>
         </div>
