@@ -33,22 +33,24 @@
 </head>
 <body class="container-100">
 
-    <main class="mainConnection mx-auto d-flex justify-content-around align-items-center">
-        <div class="wallLogin"></div>
-        <div class="formLogin d-flex flex-column justify-content-center align-items-center text-white">
-            <div class="logo text-center">
-                <h1 class="display-4">Madrasati</h1>
-                <h6>Votre succès est Notre affaire</h6>
+    <main class="">
+        <div class="mainConnection row mx-auto d-flex justify-content-around align-items-center">
+            <div class="wallLogin col-md-7 d-md-block d-none"></div>
+            <div class="formLogin col-md-5 col-sm-12 d-flex flex-column justify-content-center align-items-center text-white">
+                <div class="logo text-center">
+                    <h1 class="display-4">Madrasati</h1>
+                    <h6>Votre succès est Notre affaire</h6>
+                </div>
+                <form class="mt-5 w-100" action="connection.php" method="post">
+                    <label for="login" class="form-label mt-4">Identifiant :</label>
+                    <input type="text" class="form-control p-3" name="login" id="login" required>
+
+                    <label for="pass" class="form-label mt-4">Mot de passe :</label>
+                    <input type="password" class="form-control p-3" name="pass" id="pass" required>
+
+                    <input type="submit" value="Se connecter" class="btn btn-reg w-100 mt-4 p-3 text-white">
+                </form>
             </div>
-            <form class="mt-5 w-100" action="connection.php" method="post">
-                <label for="login" class="form-label mt-4">Identifiant :</label>
-                <input type="text" class="form-control p-3" name="login" id="login">
-
-                <label for="pass" class="form-label mt-4">Mot de passe :</label>
-                <input type="password" class="form-control p-3" name="pass" id="pass">
-
-                <input type="submit" value="Se connecter" class="btn btn-reg w-100 mt-4 p-3 text-white">
-            </form>
         </div>
     </main>
 </body>

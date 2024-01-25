@@ -52,7 +52,6 @@
 }
 .wallLogin
 {
-    width: 60%;
     height: 100%;
     background: url("../images/loginBackground1.jpg");
     background-repeat: no-repeat;
@@ -62,11 +61,14 @@
 .formLogin
 {
     background-color: #340448;
-    width: 40%;
     height: 100%;
     padding: 20px;
 }
 .btn-reg
 {
     background-color: #dc3546;
+}
+.btn-reg:hover
+{
+    background-color: #ab2936;
 }
