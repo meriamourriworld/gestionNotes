@@ -134,10 +134,9 @@
 {
     font-weight: 600;
 }
-
 .boxEtudiant
 {
-    background-color:#340448 ;
+    background-color:#340448;
 }
 .boxProf
 {
@@ -150,4 +149,41 @@
 .boxComptes
 {
     background-color: #dc3546;
+}
+.journalActivite
+{
+    /* flex-wrap: wrap; */
+}
+.journal
+{
+    width: 20%;
+    height: 60vh;
+    border-radius: 10px;
+}
+.journal h6
+{
+    background-color: rgba(255, 255, 255, 0.921);
+    border-radius: 10px 10px 0 0;
+}
+.journalEtudiant
+{
+    background-color: #340448;
+}
+.journalProfesseur
+{
+    background-color: #dc3546;
+}
+.journalClasse
+{
+    background-color: #340448;
+}
+.journalCompte
+{
+    background-color: #dc3546;
+}
+.names
+{
+    color: #e2c4d3;
+    font-weight: 600;
+    text-decoration: underline;
 }
