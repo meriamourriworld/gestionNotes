@@ -18,6 +18,7 @@
                 //Enregistrer les données de session
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $login;
+                $_SESSION['role'] = $user['role'];
                 setcookie('currentUser', $login, time() + (86400 * 30), "/");
 
                 //Redirection de l'utiisateur vers sa page d'accueil en fonction de son role

@@ -1,4 +1,7 @@
-
+<?php
+    $username = strtoupper($_SESSION['username']);
+    $role = $_SESSION['role'];
+?>
     <header class="header d-flex justify-content-between align-items-center px-4">
         <section class="logo text-center">
             <h1>Madrasati</h1>
@@ -10,8 +13,8 @@
             <div class="user d-flex justify-content-around align-items-center w-50">
                 <img src="./images/profile.png" alt="Utilisateur">
                 <div class="info d-flex flex-column justify-content-center">
-                    <span class="username fw-bold">User name</span>
-                    <span class="role text-white-50">role</span>
+                    <span class="username fw-bold"><?php echo $username; ?></span>
+                    <span class="role text-white-50"><?php echo $role; ?></span>
                 </div>
 
             </div>
