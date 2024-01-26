@@ -34,17 +34,15 @@
 
                 } else if ($user["role"] == "etudiant") {
                     echo("bienvenue etudiant");
-
                 }
             }else
             {
                 //Mot de passe incorrect
                 $errMsg = "Mot de passe incorrect";
-
             }
         }else
         {
-            //Aucun utilisateur attribué à cet identifiant
+            //identifiant inexistant
             $errMsg = "Aucun utilisateur attribué à cet identifiant";
         }
     }
