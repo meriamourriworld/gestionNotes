@@ -101,7 +101,53 @@
 {
     color: #eec6ff;
 }
-.user, .notifications, .deconnexion
+.user, .notifications, .deconnexion, .menuText
 {
     cursor: pointer;
+}
+/*****************************************DASHBORD ADMIN*******************************************/
+.sideMenu
+{
+    background-color: #340448;
+    border-top: 1px solid #dc354699;
+    height: 90vh;
+    width: 20%;
+}
+.sideMenuWrapper
+{
+    height: 50%;
+    width: 80%;
+}
+.dashContent
+{
+    height: 90vh;
+    width: 80%;
+}
+.box
+{
+    width: 20%;
+    height: max-content;
+    padding: 20px;
+    border-radius: 10px;
+}
+.box h5
+{
+    font-weight: 600;
+}
+
+.boxEtudiant
+{
+    background-color:#340448 ;
+}
+.boxProf
+{
+    background-color: #dc3546;
+}
+.boxClasse
+{
+    background-color: #340448;
+}
+.boxComptes
+{
+    background-color: #dc3546;
 }

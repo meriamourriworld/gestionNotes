@@ -1,4 +1,5 @@
 <?php 
+    session_start();
    include_once("connectDb.php");
 
     $errMsg = "";
@@ -6,11 +7,6 @@
     {
         $login = $_POST["login"];
         $password = $_POST["pass"];
-
-
-
-
-
 
         $getUserReq = "select * from utilisateur where identifiant='".$login."';";
         $getUserRes = $con->query($getUserReq);
@@ -20,14 +16,14 @@
             if(password_verify($password, $user["motPasse"]))
             {
                 //Enregistrer les données de session
-                $_SESSION["loggedin"] = true;
-                $_SESSION["username"] = $login;
-                setcookie("currentUser", $login, time() + (86400 * 30), "/");
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $login;
+                setcookie('currentUser', $login, time() + (86400 * 30), "/");
 
                 //Redirection de l'utiisateur vers sa page d'accueil en fonction de son role
                 if($user["role"] == "admin")
                 {
-                    echo("bienvenue admin");
+                    header("location:vueEnsembleAdmin.php");
                 }
                 else if ($user["role"] == "professeur") {
                     echo("bienvenue professeur");
