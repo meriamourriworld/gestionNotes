@@ -53,31 +53,31 @@
 
                             if($nbPrsansMat["nb"] > 0)
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Vous avez " . $nbPrsansMat["nb"] ." Professeurs affectés(es) à aucune matière</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbPrsansMat["nb"] ."</span> Professeurs affectés(es) à aucune matière</h6>";
                             }else
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans matière</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans matière</h6>";
                             }
                             if($nbPrsansProfil["nb"] > 0)
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Vous avez " . $nbPrsansProfil["nb"] ." Professeurs sans profil</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbPrsansProfil["nb"] ."</span> Professeurs sans profil</h6>";
                             }else
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans profil</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans profil</h6>";
                             }
                             if($nbEtsansClasse["nb"] > 0)
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Vous avez " . $nbEtsansClasse["nb"] ." Étudiants(es) non intégrés(es) aux classes</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbEtsansClasse["nb"] ."</span> Étudiants(es) non intégrés(es) aux classes</h6>";
                             }else
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Tous les étudiants sont affectés aux classes</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Tous les étudiants sont affectés aux classes</h6>";
                             }
                             if($nbEtsansProfil["nb"] > 0)
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Vous avez " . $nbEtsansProfil["nb"] ." Étudiants(es) sans profil</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbEtsansProfil["nb"] ."</span> Étudiants(es) sans profil</h6>";
                             }else
                             {
-                                echo "<h5 class='text-white alert fw-light'>- Aucune action n'est requise (Tous les étudiants possèdent des profils)</h5>";
+                                echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise (Tous les étudiants possèdent des profils)</h6>";
                             }
                         ?>
                     </div>

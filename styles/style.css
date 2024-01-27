@@ -112,8 +112,23 @@
 }
 h3.notifSideBarTitle
 {
-    color: #eec6ff;
+    color: #dc3546;
     font-weight: 400;
+}
+#notifications
+{
+    position: relative;
+}
+#notifications::after
+{
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #dc3546;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 /*****************************************DASHBORD ADMIN*******************************************/
 .sideMenu
