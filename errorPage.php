@@ -1,6 +1,7 @@
 <?php 
-
+    include_once("connectDb.php");
     $errMsg = "ERROR";
+
     if(isset($_GET["msg"]))
     {
         $errMsg = $_GET["msg"];

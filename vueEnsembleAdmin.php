@@ -37,17 +37,17 @@
     $nbComptes = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
     $nbComptes = $nbComptes["nb"];
 
-    //Récupérer le journal des différents indices du système
-    $sqlStat = "select nomEtud, prenomEtud from etudiant Limit 3;";
+    //Récupérer le journal des dernières opérations du système
+    $sqlStat = "select nomEtud, prenomEtud from etudiant order by id desc Limit 3;";
     $sqlStatResE = $con->query($sqlStat);
 
-    $sqlStat = "select nomProf, prenomProf from professeur Limit 3;";
+    $sqlStat = "select nomProf, prenomProf from professeur order by id desc Limit 3;";
     $sqlStatResP = $con->query($sqlStat);
 
-    $sqlStat = "select nomClasse, niveauClasse from classe Limit 3;";
+    $sqlStat = "select nomClasse, niveauClasse from classe order by id desc Limit 3;";
     $sqlStatResC = $con->query($sqlStat);
     
-    $sqlStat = "select identifiant, role from utilisateur Limit 3;";
+    $sqlStat = "select identifiant, role from utilisateur order by idUser desc Limit 3;";
     $sqlStatResU = $con->query($sqlStat);
     
 ?>
@@ -70,7 +70,7 @@
             
                 <div class="menu">
                     <span class="icone pe-3"><svg xmlns="http://www.w3.org/2000/svg" fill="#eec6ff" width="20" height="20" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 96V224H256V96H384zm0 192V416H256V288H384zM192 224H64V96H192V224zM64 288H192V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg></span>
-                    <span class="menuText text-white">Vue Ensemble</span>
+                    <span class="menuText text-white"><a href="vueEnsembleAdmin.php">Vue Ensemble</a></span>
                 </div>
 
                 <div class="menu">
