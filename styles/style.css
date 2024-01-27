@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Guntur:wght@300&family=Wallpoet&display=swap&family=Montserrat:wght@100;200;400;600&family=Raleway:wght@200;500&display=swap');
-
+:root
+{
+    --color : #dc3546;
+}
 *
 {
     margin: 0;
@@ -80,7 +83,7 @@
 .header
 {
     background-color: #340448;
-    height: 10vh;
+    height: 70px;
 }
 .userInfo
 {
@@ -112,7 +115,7 @@
 }
 h3.notifSideBarTitle
 {
-    color: #dc3546;
+    color: #eec6ff;
     font-weight: 400;
 }
 #notifications
@@ -124,7 +127,7 @@ h3.notifSideBarTitle
     content: "";
     width: 6px;
     height: 6px;
-    background-color: #dc3546;
+    background-color: var(--color);
     border-radius: 50%;
     position: absolute;
     top: 0px;
@@ -135,7 +138,7 @@ h3.notifSideBarTitle
 {
     background-color: #340448;
     border-top: 1px solid #dc354699;
-    height: 90vh;
+    height: calc(100vh - 70px);
     width: 20%;
 }
 .sideMenuWrapper
@@ -174,10 +177,6 @@ h3.notifSideBarTitle
 .boxComptes
 {
     background-color: #dc3546;
-}
-.journalActivite
-{
-    /* flex-wrap: wrap; */
 }
 .journal
 {
