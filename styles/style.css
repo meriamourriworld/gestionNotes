@@ -105,6 +105,16 @@
 {
     cursor: pointer;
 }
+#notifSideBar
+{
+    background-color: #340448;
+    border-left: 1px solid #eec6ff;
+}
+h3.notifSideBarTitle
+{
+    color: #eec6ff;
+    font-weight: 400;
+}
 /*****************************************DASHBORD ADMIN*******************************************/
 .sideMenu
 {
