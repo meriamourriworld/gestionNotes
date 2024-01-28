@@ -5,3 +5,8 @@ notifBell.addEventListener("click", ()=>
 {
     notifBell.style.setProperty("--color", "transparent");
 });
+
+//Using Data Table
+// new DataTable('#example', {
+//     paging: true
+// });

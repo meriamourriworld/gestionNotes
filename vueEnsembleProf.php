@@ -15,21 +15,28 @@
 
 
     //Récupérer les stats des différents indices du système
+    //NOmbre d'étudiants par classe
     $sqlStat = "select count(*) as 'nb' from etudiant where classe in (select classe from classeprof where professeur='".$_SESSION["matricule"]."');";
     $sqlStatRes = $con->query($sqlStat);
     $nbEtudiants = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
     $nbEtudiants = $nbEtudiants["nb"];
 
+    //Nombre de classes du prof
     $sqlStat = "select count(*) as 'nb' from classeprof where professeur='". $_SESSION["matricule"]."';";
     $sqlStatRes = $con->query($sqlStat);
     $nbClasses = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
     $nbClasses = $nbClasses["nb"];
 
+    //Nombre de devoir en total
     $sqlStat = "select count(*) as 'nb' from devoir where matiere in (select matiere from professeur where idProf='".$_SESSION["matricule"]."');";
     $sqlStatRes = $con->query($sqlStat);
     $nbDevoirs = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
     $nbDevoirs = $nbDevoirs["nb"];
 
+
+    //Liste de tous les étudiants des différentes classes attribuées au professeur
+    $sqlLstEtud = "select * from etudiant where classe in (select classe from classeprof where professeur='".$_SESSION["matricule"]."') order by classe;";
+    $sqlLstEtudRes = $con->query($sqlLstEtud);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,9 +96,56 @@
             </article>
 
 
+            <article class="lstEtudWrapper d-flex justify-content-center mt-5">
+
+                <table class="text-center mt-5" id="lstEtudiants" >
+                    <thead class="entete">
+                        <tr class="text-light">
+                            <td>Cne</td>
+                            <td>Nom</td>
+                            <td>Prénom</td>
+                            <td>E-mail</td>
+                            <td>Téléphone</td>
+                            <td>Photo</td>
+                            <td>Profil</td>
+                            <td>Classe</td>
+                        </tr>
+                    </thead>
+
+                    <tbody class="fs-6">
+                        <?php
+                            if($sqlLstEtudRes->rowcount() > 0)
+                            {
+                                while($etudiants = $sqlLstEtudRes->fetch(PDO::FETCH_ASSOC))
+                                {
+                                    echo "<tr>";
+                                        echo "<td>".$etudiants["cne"]."</td>";
+                                        echo "<td>".$etudiants['nomEtud']."</td>";
+                                        echo "<td>".$etudiants['prenomEtud']."</td>";
+                                        echo "<td>".$etudiants['mailEtud']."</td>";
+                                        echo "<td>".$etudiants['telEtud']."</td>";
+                                        echo "<td>".$etudiants['photoEtud']."</td>";
+                                        echo "<td>".$etudiants['profil']."</td>";
+                                        echo "<td>".$etudiants['classe']."</td>";
+                                    echo "</tr>";
+                                }
+                            }else
+                            {
+                                echo "<tr>";
+                                echo "<td colspan=8>Vous n'avez pas encore reçu la liste des étudiants</td>";
+                                echo "</tr>";
+
+                            }
+
+                        ?>
+                    </tbody>
+                </table>
+            </article>
         </section>
     </main>
+  
     <script src="./scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 </html>

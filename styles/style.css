@@ -216,3 +216,32 @@ h3.notifSideBarTitle
 {
     height: max-content;
 }
+.lstEtudWrapper
+{
+    overflow-y: scroll;
+    scrollbar-color: #dc3546 #340448;
+    scrollbar-width: thin;
+    height: calc(100vh - 300px);
+}
+#lstEtudiants
+{
+    width: 95%;
+    height: max-content;
+}
+#lstEtudiants thead tr
+{
+    height: 80px;
+    background-color: #340448;
+    color: white;
+}
+#lstEtudiants thead
+{
+    position: sticky;
+    top: 0px;
+}
+#lstEtudiants tbody tr
+{
+    height: 50px;
+    border-bottom: 1px solid #120218;
+}
+
