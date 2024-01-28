@@ -80,3 +80,13 @@ CREATE TABLE ClasseProf(
     PRIMARY KEY (classe, professeur)
 );
 ALTER TABLE ClasseProf ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;
+
+CREATE TABLE Notes (
+    etudiant varchar(10),
+    devoir varchar(10),
+    note float,
+    PRIMARY KEY(etudiant, devoir),
+    FOREIGN KEY (etudiant) REFERENCES etudiant(cne),
+    FOREIGN KEY (devoir) REFERENCES Devoir(idDev)
+);
+ALTER table Notes ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;

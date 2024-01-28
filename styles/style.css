@@ -211,3 +211,8 @@ h3.notifSideBarTitle
     font-weight: 600;
     text-decoration: underline;
 }
+/***************************************************VUE ENSEMBLE PROF******************************/
+.boxPr 
+{
+    height: max-content;
+}

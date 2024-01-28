@@ -12,7 +12,7 @@
     $comptes = array();
 
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"]==false)
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"]==false || $_SESSION["role"] != "admin")
     {
         header("location:connection.php");
     }

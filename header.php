@@ -3,27 +3,44 @@
     $username = strtoupper($_SESSION['username']);
     $role = $_SESSION['role'];
 
-    //Récupérer les rappels des affections non encore effectuées par l'administrateur du système
-    $nbPrsansMat = "";
-    $nbPrsansProfil = "";
-    $nbEtsansClasse = "";
-    $nbEtsansProfil = "";
 
-    $sql = "select count(*) as 'nb' from professeur where matiere IS null;"; //Nombre de professeurs non affectés(es) aux matières
-    $sqlRes = $con->query($sql);
-    $nbPrsansMat = $sqlRes->fetch(PDO::FETCH_ASSOC);
+    //Notifications ADMIN
+    if($role == "admin")
+    {
+        //Récupérer les rappels des affections non encore effectuées par l'administrateur du système
+        $nbPrsansMat = "";
+        $nbPrsansProfil = "";
+        $nbEtsansClasse = "";
+        $nbEtsansProfil = "";
 
-    $sql = "select count(*) as 'nb' from professeur where profil IS null;"; //Nombre de professeurs sans profil
-    $sqlRes = $con->query($sql);
-    $nbPrsansProfil = $sqlRes->fetch(PDO::FETCH_ASSOC);
+        $sql = "select count(*) as 'nb' from professeur where matiere IS null;"; //Nombre de professeurs non affectés(es) aux matières
+        $sqlRes = $con->query($sql);
+        $nbPrsansMat = $sqlRes->fetch(PDO::FETCH_ASSOC);
 
-    $sql = "select count(*) as 'nb' from etudiant where classe IS null;"; //Nombre d'étudiants sans Classe
-    $sqlRes = $con->query($sql);
-    $nbEtsansClasse = $sqlRes->fetch(PDO::FETCH_ASSOC);
+        $sql = "select count(*) as 'nb' from professeur where profil IS null;"; //Nombre de professeurs sans profil
+        $sqlRes = $con->query($sql);
+        $nbPrsansProfil = $sqlRes->fetch(PDO::FETCH_ASSOC);
 
-    $sql = "select count(*) as 'nb' from etudiant where profil IS null;"; //Nombre d'étudiants sans profil
-    $sqlRes = $con->query($sql);
-    $nbEtsansProfil = $sqlRes->fetch(PDO::FETCH_ASSOC);
+        $sql = "select count(*) as 'nb' from etudiant where classe IS null;"; //Nombre d'étudiants sans Classe
+        $sqlRes = $con->query($sql);
+        $nbEtsansClasse = $sqlRes->fetch(PDO::FETCH_ASSOC);
+
+        $sql = "select count(*) as 'nb' from etudiant where profil IS null;"; //Nombre d'étudiants sans profil
+        $sqlRes = $con->query($sql);
+        $nbEtsansProfil = $sqlRes->fetch(PDO::FETCH_ASSOC);
+    }
+    //Notifications PROFESSEUR
+    if($role == "professeur")
+    {
+
+    }
+    //Notifications ETUDIANT
+    if($role == "etudiant")
+    {
+
+    }
+
+   
 ?>
     <header class="header d-flex justify-content-between align-items-center px-4">
         <section class="logo text-center">
@@ -50,34 +67,47 @@
                     </div>
                     <div class="offcanvas-body">
                         <?php
+                            //Notifications Admin
+                            if($role == "admin")
+                            {
+                                if($nbPrsansMat["nb"] > 0)
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbPrsansMat["nb"] ."</span> Professeurs affectés(es) à aucune matière</h6>";
+                                }else
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans matière</h6>";
+                                }
+                                if($nbPrsansProfil["nb"] > 0)
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbPrsansProfil["nb"] ."</span> Professeurs sans profil</h6>";
+                                }else
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans profil</h6>";
+                                }
+                                if($nbEtsansClasse["nb"] > 0)
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbEtsansClasse["nb"] ."</span> Étudiants(es) non intégrés(es) aux classes</h6>";
+                                }else
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Tous les étudiants sont affectés aux classes</h6>";
+                                }
+                                if($nbEtsansProfil["nb"] > 0)
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbEtsansProfil["nb"] ."</span> Étudiants(es) sans profil</h6>";
+                                }else
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise (Tous les étudiants possèdent des profils)</h6>";
+                                }
+                            }
+                            //Notifications Admin
+                            if($role == "professeur")
+                            {
 
-                            if($nbPrsansMat["nb"] > 0)
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbPrsansMat["nb"] ."</span> Professeurs affectés(es) à aucune matière</h6>";
-                            }else
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans matière</h6>";
                             }
-                            if($nbPrsansProfil["nb"] > 0)
+                            //Notifications Admin
+                            if($role == "etudiant")
                             {
-                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbPrsansProfil["nb"] ."</span> Professeurs sans profil</h6>";
-                            }else
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise de votre part pour les professeurs sans profil</h6>";
-                            }
-                            if($nbEtsansClasse["nb"] > 0)
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbEtsansClasse["nb"] ."</span> Étudiants(es) non intégrés(es) aux classes</h6>";
-                            }else
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Tous les étudiants sont affectés aux classes</h6>";
-                            }
-                            if($nbEtsansProfil["nb"] > 0)
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Vous avez <span class='fw-bold px-1'>" . $nbEtsansProfil["nb"] ."</span> Étudiants(es) sans profil</h6>";
-                            }else
-                            {
-                                echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise (Tous les étudiants possèdent des profils)</h6>";
+                                
                             }
                         ?>
                     </div>

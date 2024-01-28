@@ -27,10 +27,21 @@
                     header("location:vueEnsembleAdmin.php");
                 }
                 else if ($user["role"] == "professeur") {
-                    echo("bienvenue professeur");
-
+                    //Récupérer les infos du compte prof associé au profil
+                    $sql = "select * from professeur where profil = ". $user["idUser"];
+                    $prof = $con->query($sql);
+                    if($prof->rowcount() > 0)
+                    {
+                        $prof = $prof->fetch(PDO::FETCH_ASSOC);
+                        $_SESSION["matricule"] = $prof["idProf"];
+                        header("location:vueEnsembleProf.php");
+                    }else
+                    {
+                        $errMsg = "Ce compte n'est pas encore attribué à un professeur!";
+                        header("location:errorPage.php?msg=".$errMsg);
+                    }
                 } else if ($user["role"] == "etudiant") {
-                    echo("bienvenue etudiant");
+                    header("location:vueEnsembleEtudiant.php");
                 }
             }else
             {
