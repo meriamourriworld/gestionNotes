@@ -15,7 +15,7 @@
 
 
     //Récupérer les stats des différents indices du système
-    $sqlStat = "select count(*) as 'nb' from etudiant;";
+    $sqlStat = "select count(*) as 'nb' from etudiant where classe in (select classe from classeprof where professeur='".$_SESSION["matricule"]."');";
     $sqlStatRes = $con->query($sqlStat);
     $nbEtudiants = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
     $nbEtudiants = $nbEtudiants["nb"];
@@ -25,10 +25,10 @@
     $nbClasses = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
     $nbClasses = $nbClasses["nb"];
 
-    // $sqlStat = "select count(*) as 'nb' from devoir where matiere in (select matiere from professeur where idProf='$_SESSION['matricule']';)";
-    // $sqlStatRes = $con->query($sqlStat);
-    // $nbClasses = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
-    // $nbClasses = $nbClasses["nb"];
+    $sqlStat = "select count(*) as 'nb' from devoir where matiere in (select matiere from professeur where idProf='".$_SESSION["matricule"]."');";
+    $sqlStatRes = $con->query($sqlStat);
+    $nbDevoirs = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
+    $nbDevoirs = $nbDevoirs["nb"];
 
 ?>
 <!DOCTYPE html>
@@ -76,15 +76,15 @@
             <article class="stats d-flex justify-content-around  mt-3 text-white">
                 <div class="boxPr p-3 col-3 bg-success">
                     <h6>Étudiants</h6>
-                    <h3><?php echo $nbEtudiants?></h3>
+                    <h3><?php echo $nbEtudiants ."<span class='fs-6 fw-lighter text-white-50 ps-2'>  en cours</span>";?></h3>
                 </div>
                 <div class="boxPr p-3 col-4 bg-success">
                     <h6>Devoirs</h6>
-                    <h3><?php echo $nbDevoirs?></h3>
+                    <h3><?php echo $nbDevoirs ."<span class='fs-6 fw-lighter text-white-50 ps-2'>  en cours</span>";?></h3>
                 </div>
                 <div class="boxPr p-3 col-3 bg-success">
                     <h6>Classes</h6>
-                    <h3><?php echo $nbClasses?></h3>
+                    <h3><?php echo $nbClasses ."<span class='fs-6 fw-lighter text-white-50 ps-2'>  en cours</span>";?></h3>
                 </div>
             </article>
 
