@@ -6,4 +6,11 @@ notifBell.addEventListener("click", ()=>
     notifBell.style.setProperty("--color", "transparent");
 });
 
-//
+//Managing settings student click
+const settings = document.querySelector(".setting");
+
+settings.addEventListener("click", ()=>
+{
+    const settingWindow = document.querySelector(".settingWindow");
+    settingWindow.classList.toggle("display");
+})

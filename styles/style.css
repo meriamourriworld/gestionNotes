@@ -149,13 +149,8 @@ h3.notifSideBarTitle
 }
 .dashContent
 {
-    height: 90vh;
+    height: max-content;
     width: 80%;
-}
-.dashContentStudent
-{
-    width: 100%;
-    background-color: #f5f5f5;
 }
 .box
 {
@@ -251,6 +246,10 @@ h3.notifSideBarTitle
     border-bottom: 1px solid #120218;
 }
 /*****************************************STUDENT STYLE*******************************************/
+.dashStudent
+{
+    background-color: rgb(205, 205, 205);
+}
 .setting
 {
     border-radius: 50%;
@@ -262,6 +261,75 @@ h3.notifSideBarTitle
     cursor: pointer;
     animation: floating .5s infinite ease alternate-reverse;
 }
+.display
+{
+    display: none;
+}
+.settingWindow
+{
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    background-color: #340448;
+    box-shadow: 5px 10px 100px #a5a5a5;
+}
+.dashContentStudent
+{
+    width: 100%;
+    min-height: max-content;
+    background-color: rgb(205, 205, 205);
+}
+.dashContentWrapper
+{
+    width: 85%;
+    height: max-content;
+}
+.msgTitleWrapper
+{
+    width: 100%;
+    border-bottom: 1px solid #868686;
+}
+.title
+{
+    color: #340448;
+}
+.messagesImportant
+{
+    border-top: 5px solid #ab2936;
+}
+.messagesImportant, .matieres
+{
+    box-shadow: 10px 10px 100px #868686;
+    height: 80vh;
+    border-radius: 5px;
+}
+.matieres
+{
+    height: max-content;
+    border-top: 5px solid #340448;
+}
+.lstMessages
+{
+    margin-top: 50%;
+}
+.detailsMatiere
+{
+    border-bottom: 1px solid #868686;
+}
+#matiereHoraire
+{
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 10px;
+}
+#matiereHoraire:hover
+{
+    background-color: #c6c5c5;
+}
+
 @keyframes floating {
     from
     {
