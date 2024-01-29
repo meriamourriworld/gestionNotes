@@ -41,7 +41,19 @@
                         header("location:errorPage.php?msg=".$errMsg);
                     }
                 } else if ($user["role"] == "etudiant") {
-                    header("location:vueEnsembleEtudiant.php");
+                     //Récupérer les infos du compte etudiant associé au profil
+                     $sql = "select * from etudiant where profil = ". $user["idUser"];
+                     $etudiant = $con->query($sql);
+                     if($etudiant->rowcount() > 0)
+                     {
+                         $etudiant = $etudiant->fetch(PDO::FETCH_ASSOC);
+                         $_SESSION["matricule"] = $etudiant["idEtud"];
+                        header("location:vueEnsembleEtudiant.php");
+                     }else
+                     {
+                         $errMsg = "Ce compte n'est pas encore attribué à un étudiant!";
+                         header("location:errorPage.php?msg=".$errMsg);
+                     }
                 }
             }else
             {

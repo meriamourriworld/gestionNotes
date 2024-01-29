@@ -46,6 +46,7 @@
 }
 .logo h6
 {
+    margin-top: -5px;
     font-size: 0.9em;
 }
 .mainConnection
@@ -151,6 +152,11 @@ h3.notifSideBarTitle
     height: 90vh;
     width: 80%;
 }
+.dashContentStudent
+{
+    width: 100%;
+    background-color: #f5f5f5;
+}
 .box
 {
     width: 20%;
@@ -244,4 +250,25 @@ h3.notifSideBarTitle
     height: 50px;
     border-bottom: 1px solid #120218;
 }
-
+/*****************************************STUDENT STYLE*******************************************/
+.setting
+{
+    border-radius: 50%;
+    background-color: #340448;
+    padding: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    animation: floating .5s infinite ease alternate-reverse;
+}
+@keyframes floating {
+    from
+    {
+        bottom: 20px;
+    }
+    to
+    {
+        bottom: 23px;
+    }
+}
