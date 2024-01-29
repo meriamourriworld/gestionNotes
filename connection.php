@@ -47,7 +47,7 @@
                      if($etudiant->rowcount() > 0)
                      {
                          $etudiant = $etudiant->fetch(PDO::FETCH_ASSOC);
-                         $_SESSION["matricule"] = $etudiant["idEtud"];
+                         $_SESSION["matricule"] = $etudiant["cne"];
                         header("location:vueEnsembleEtudiant.php");
                      }else
                      {

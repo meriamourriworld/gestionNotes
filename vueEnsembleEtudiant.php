@@ -3,18 +3,22 @@
     include_once("connectDb.php");
 
 
-
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"]==false || $_SESSION["role"] != "etudiant")
     {
         header("location:connection.php");
     }
 
-    //Récupérer les stats des différents indices du système
-    //NOmbre d'étudiants par classe
-    $sqlStat = "select count(*) as 'nb' from etudiant where classe in (select classe from classeprof where professeur='".$_SESSION["matricule"]."');";
-    $sqlStatRes = $con->query($sqlStat);
-    $nbEtudiants = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
-    $nbEtudiants = $nbEtudiants["nb"];
+    //Récupérer les infos personnalisées pour l'étudiant
+
+    //liste des matières enseignées à l'étudiant
+    $sql = "select idMat, nomMat 
+                from matiere m, professeur p, classeprof cp, etudiant e
+                WHERE m.idMat = p.matiere 
+                and p.idProf = cp.professeur
+                and cp.classe = e.classe
+                and e.cne = '". $_SESSION["matricule"]."';";
+    $sqlRes = $con->query($sql);
+    
 
 ?>
 <!DOCTYPE html>
@@ -43,17 +47,29 @@
                 <div class="matieres p-2 col-8">
                     <div class="msgTitleWrapper"><h4 class="matieresTitle py-3 ps-3 ">Matières</h4></div>
                     <!--Liste des matières -->
-                    <div class="detailsMatiere mt-3 py-2 px-5 border-bottom-secondary d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="title">Nom Matière</h5>
-                            <h6 class="">Code Matière</h6>
-                            <p>Vous suivez ce cours</p>
-                        </div>
-                        <div id="matiereHoraire">
-                            <svg data-v-768d5266="" width="1.5em" height="1.5em" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 26 26" data-svg-id="mpo-svg-calendrier" aria-hidden="true" class="m-svg mpo-bouton-icone__svg"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="2.0308"><line x1="16.8" y1="10.1" x2="19.7" y2="10.1"></line><line x1="10.5" y1="10.1" x2="13.5" y2="10.1"></line><line x1="4.3" y1="10.1" x2="7.2" y2="10.1"></line><line x1="16.8" y1="14.1" x2="19.7" y2="14.1"></line><line x1="10.5" y1="14.1" x2="13.5" y2="14.1"></line><line x1="4.3" y1="14.1" x2="7.2" y2="14.1"></line><line x1="16.8" y1="18.2" x2="19.7" y2="18.2"></line><line x1="10.5" y1="18.2" x2="13.5" y2="18.2"></line><line x1="4.3" y1="18.2" x2="7.2" y2="18.2"></line><line x1="0.5" y1="6.2" x2="23.5" y2="6.2"></line><path d="M1.5,1.9 c-0.6,0-1,0.4-1,1v18.2c0,0.6,0.4,1,1,1h21c0.6,0,1-0.4,1-1V2.9c0-0.6-0.4-1-1-1C22.5,1.9,1.5,1.9,1.5,1.9z"></path></g></svg>
-                         </div>
-                </div>
-
+                   
+                            <?php
+                                if($sqlRes->rowcount() >0)
+                                {
+                                    while($matiere = $sqlRes->fetch(PDO::FETCH_ASSOC))
+                                    {
+                    
+                                        echo "<div class='detailsMatiere mt-3 py-2 px-5 border-bottom-secondary d-flex justify-content-between align-items-center'>";
+                                            echo "<div>";
+                                                echo "<h5 class='title'>".$matiere['nomMat']."</h5>";
+                                                echo "<h6>".$matiere['idMat']."</h6>";
+                                                echo "<p>Vous suivez ce cours</p>";
+                                            echo "</div>";
+                                            echo "<div id='matiereHoraire'>";
+                                            echo "<svg data-v-768d5266='' width='1.5em' height='1.5em' xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 26 26' data-svg-id='mpo-svg-calendrier' aria-hidden='true' class='m-svg mpo-bouton-icone__svg'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='2.0308'><line x1='16.8' y1='10.1' x2='19.7' y2='10.1'></line><line x1='10.5' y1='10.1' x2='13.5' y2='10.1'></line><line x1='4.3' y1='10.1' x2='7.2' y2='10.1'></line><line x1='16.8' y1='14.1' x2='19.7' y2='14.1'></line><line x1='10.5' y1='14.1' x2='13.5' y2='14.1'></line><line x1='4.3' y1='14.1' x2='7.2' y2='14.1'></line><line x1='16.8' y1='18.2' x2='19.7' y2='18.2'></line><line x1='10.5' y1='18.2' x2='13.5' y2='18.2'></line><line x1='4.3' y1='18.2' x2='7.2' y2='18.2'></line><line x1='0.5' y1='6.2' x2='23.5' y2='6.2'></line><path d='M1.5,1.9 c-0.6,0-1,0.4-1,1v18.2c0,0.6,0.4,1,1,1h21c0.6,0,1-0.4,1-1V2.9c0-0.6-0.4-1-1-1C22.5,1.9,1.5,1.9,1.5,1.9z'></path></g></svg>";
+                                            echo "</div>";
+                                        echo "</div>";
+                                    }
+                                }else
+                                {
+                                    echo "<h5 class='title'>Vous n'êtes inscrit à aucune matière encore!</h5>";
+                                }
+                            ?>
 
                 </div>
 
