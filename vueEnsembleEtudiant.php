@@ -65,7 +65,7 @@
                                             echo "</div>";
                                             echo "<div class='matiereHoraireDetails display'>";
                                                 echo "<h5>Plages Horaires</h5>";
-                                                echo "<h6>".$matiere['nomMat'] ." - " . $matiere['idMat']."</h6>";
+                                                echo "<h6 class='courseCode'>".$matiere['nomMat'] ." - " . $matiere['idMat']."</h6>";
                                                 echo "<p> - Tous les jeudis, de 16 h 30 à 18 h 20 </p>";
                                                 echo "<p class='plagesHoraire'> - Tous les Lundis, de 09 h 00 à 12 h 00 </p>";
                                             echo "</div>";
