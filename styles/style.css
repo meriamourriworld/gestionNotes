@@ -318,18 +318,34 @@ h3.notifSideBarTitle
 .detailsMatiere
 {
     border-bottom: 1px solid #868686;
+    position: relative;
 }
-#matiereHoraire
+.matiereHoraire
 {
     cursor: pointer;
     border-radius: 50%;
     padding: 10px;
 }
-#matiereHoraire:hover
+.matiereHoraire:hover
 {
     background-color: #c6c5c5;
 }
-
+.matiereHoraireDetails
+{
+    position: absolute;
+    top: -110px;
+    right: -10px;
+    width: max-content;
+    height: 150px;
+    border: 1px solid #868686;
+    background-color: rgb(247, 246, 246);
+    border-radius: 3px;
+    padding: 20px;
+}
+.plagesHoraire
+{
+    margin-top: -20px;
+}
 @keyframes floating {
     from
     {

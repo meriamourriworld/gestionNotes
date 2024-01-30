@@ -11,7 +11,7 @@
     //Récupérer les infos personnalisées pour l'étudiant
 
     //liste des matières enseignées à l'étudiant
-    $sql = "select idMat, nomMat 
+    $sql = "select idMat, nomMat
                 from matiere m, professeur p, classeprof cp, etudiant e
                 WHERE m.idMat = p.matiere 
                 and p.idProf = cp.professeur
@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/style.css">
-    <title>Tableau de bord - Admin!</title>
+    <title>Tableau de bord - <?php echo $_SESSION["username"]; ?>!</title>
 </head>
 <body class="dashStudent">
     <?php include_once("header.php");?>
@@ -60,8 +60,14 @@
                                                 echo "<h6>".$matiere['idMat']."</h6>";
                                                 echo "<p>Vous suivez ce cours</p>";
                                             echo "</div>";
-                                            echo "<div id='matiereHoraire'>";
-                                            echo "<svg data-v-768d5266='' width='1.5em' height='1.5em' xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 26 26' data-svg-id='mpo-svg-calendrier' aria-hidden='true' class='m-svg mpo-bouton-icone__svg'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='2.0308'><line x1='16.8' y1='10.1' x2='19.7' y2='10.1'></line><line x1='10.5' y1='10.1' x2='13.5' y2='10.1'></line><line x1='4.3' y1='10.1' x2='7.2' y2='10.1'></line><line x1='16.8' y1='14.1' x2='19.7' y2='14.1'></line><line x1='10.5' y1='14.1' x2='13.5' y2='14.1'></line><line x1='4.3' y1='14.1' x2='7.2' y2='14.1'></line><line x1='16.8' y1='18.2' x2='19.7' y2='18.2'></line><line x1='10.5' y1='18.2' x2='13.5' y2='18.2'></line><line x1='4.3' y1='18.2' x2='7.2' y2='18.2'></line><line x1='0.5' y1='6.2' x2='23.5' y2='6.2'></line><path d='M1.5,1.9 c-0.6,0-1,0.4-1,1v18.2c0,0.6,0.4,1,1,1h21c0.6,0,1-0.4,1-1V2.9c0-0.6-0.4-1-1-1C22.5,1.9,1.5,1.9,1.5,1.9z'></path></g></svg>";
+                                            echo "<div class='matiereHoraire'>";
+                                                echo "<svg data-v-768d5266='' width='1.5em' height='1.5em' xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 26 26' data-svg-id='mpo-svg-calendrier' aria-hidden='true' class='m-svg mpo-bouton-icone__svg'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='2.0308'><line x1='16.8' y1='10.1' x2='19.7' y2='10.1'></line><line x1='10.5' y1='10.1' x2='13.5' y2='10.1'></line><line x1='4.3' y1='10.1' x2='7.2' y2='10.1'></line><line x1='16.8' y1='14.1' x2='19.7' y2='14.1'></line><line x1='10.5' y1='14.1' x2='13.5' y2='14.1'></line><line x1='4.3' y1='14.1' x2='7.2' y2='14.1'></line><line x1='16.8' y1='18.2' x2='19.7' y2='18.2'></line><line x1='10.5' y1='18.2' x2='13.5' y2='18.2'></line><line x1='4.3' y1='18.2' x2='7.2' y2='18.2'></line><line x1='0.5' y1='6.2' x2='23.5' y2='6.2'></line><path d='M1.5,1.9 c-0.6,0-1,0.4-1,1v18.2c0,0.6,0.4,1,1,1h21c0.6,0,1-0.4,1-1V2.9c0-0.6-0.4-1-1-1C22.5,1.9,1.5,1.9,1.5,1.9z'></path></g></svg>";
+                                            echo "</div>";
+                                            echo "<div class='matiereHoraireDetails display'>";
+                                                echo "<h5>Plages Horaires</h5>";
+                                                echo "<h6>".$matiere['nomMat'] ." - " . $matiere['idMat']."</h6>";
+                                                echo "<p> - Tous les jeudis, de 16 h 30 à 18 h 20 </p>";
+                                                echo "<p class='plagesHoraire'> - Tous les Lundis, de 09 h 00 à 12 h 00 </p>";
                                             echo "</div>";
                                         echo "</div>";
                                     }
