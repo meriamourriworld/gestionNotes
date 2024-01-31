@@ -45,7 +45,16 @@
     //Notifications ETUDIANT
     if($role == "etudiant")
     {
-
+        //liste des matières enseignées à l'étudiant
+        $sqlDev = "select idDev, titreDev, dateEcheance
+        from matiere m, professeur p, classeprof cp, etudiant e, devoir d
+        WHERE m.idMat = p.matiere 
+        and d.matiere = m.idMat
+        and p.idProf = cp.professeur
+        and cp.classe = e.classe
+        and DATEDIFF(dateEcheance,CURDATE()) >0
+        and e.cne = '". $_SESSION["matricule"]."';";
+        $sqlDevRes = $con->query($sqlDev);
     }
 
    
@@ -119,7 +128,10 @@
                             //Notifications Admin
                             if($role == "etudiant")
                             {
-                                
+                                while($devoirs = $sqlDevRes->fetch(PDO::FETCH_ASSOC))
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Vous devez remettre <span class='fw-bold px-1'>" . $devoirs["idDev"]. " - ". $devoirs["titreDev"] ."</span> avant le <span class='fw-bold text-danger px-1'>".$devoirs["dateEcheance"]."</span>.</h6>";
+                                }  
                             }
                         ?>
                     </div>
