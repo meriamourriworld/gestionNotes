@@ -107,7 +107,6 @@
                             <td>E-mail</td>
                             <td>Téléphone</td>
                             <td>Photo</td>
-                            <td>Profil</td>
                             <td>Classe</td>
                         </tr>
                     </thead>
@@ -125,7 +124,6 @@
                                         echo "<td>".$etudiants['mailEtud']."</td>";
                                         echo "<td>".$etudiants['telEtud']."</td>";
                                         echo "<td>".$etudiants['photoEtud']."</td>";
-                                        echo "<td>".$etudiants['profil']."</td>";
                                         echo "<td>".$etudiants['classe']."</td>";
                                     echo "</tr>";
                                 }

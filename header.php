@@ -32,7 +32,15 @@
     //Notifications PROFESSEUR
     if($role == "professeur")
     {
-
+        $sql = "select nomMat from matiere m, professeur p  where m.idMat = p.matiere and p.idProf='".$_SESSION["matricule"]."';";
+        $sqlRes = $con->query($sql);
+        if($sqlRes->rowcount() >0)
+        {
+            $matiere = $sqlRes->fetch(PDO::FETCH_ASSOC);
+        }
+        //Devoir dont il reste 1 jour pour la date limite
+        $sql = "select idDev, titreDev from devoir where DATEDIFF(dateEcheance,CURDATE()) <=1 and matiere in (select matiere from professeur where idProf='".$_SESSION["matricule"]."');";
+        $sqlRes = $con->query($sql);
     }
     //Notifications ETUDIANT
     if($role == "etudiant")
@@ -99,10 +107,14 @@
                                     echo "<h6 class='text-white alert fw-light'>- Aucune action n'est requise (Tous les étudiants possèdent des profils)</h6>";
                                 }
                             }
-                            //Notifications Admin
+                            //Notifications Professeur
                             if($role == "professeur")
                             {
-
+                                echo "<h6 class='text-white alert fw-light'>- Votre matière principale est : <span class='fw-bold px-1'>" . $matiere["nomMat"] ."</span>.</h6>";
+                                while($devoirs = $sqlRes->fetch(PDO::FETCH_ASSOC))
+                                {
+                                    echo "<h6 class='text-white alert fw-light'>- Ce devoir : <span class='fw-bold px-1'>" . $devoirs["idDev"]. " - ". $devoirs["titreDev"] ."</span> sera clôturé prochainement.</h6>";
+                                }
                             }
                             //Notifications Admin
                             if($role == "etudiant")

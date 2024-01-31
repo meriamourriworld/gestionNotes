@@ -44,7 +44,7 @@
                      //Récupérer les infos du compte etudiant associé au profil
                      $sql = "select * from etudiant where profil = ". $user["idUser"];
                      $etudiant = $con->query($sql);
-                     if($etudiant->rowcount() > 0)
+                     if($etudiant->rowcount() >0)
                      {
                          $etudiant = $etudiant->fetch(PDO::FETCH_ASSOC);
                          $_SESSION["matricule"] = $etudiant["cne"];
