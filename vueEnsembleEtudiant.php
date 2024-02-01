@@ -18,7 +18,13 @@
                 and cp.classe = e.classe
                 and e.cne = '". $_SESSION["matricule"]."';";
     $sqlRes = $con->query($sql);
-    
+    if($_SERVER["REQUEST_METHOD"] === "POST")
+    {
+        $newPass = password_hash($_POST["mp"], PASSWORD_DEFAULT);
+        $sql = "update utilisateur set motPasse='". $newPass . "' where identifiant='" . $_SESSION["username"] . "';";
+        $con->exec($sql);
+        header("location:connection.php");
+    }
 
 ?>
 <!DOCTYPE html>
@@ -39,6 +45,15 @@
         </div>
         <div class="settingWindow display">
             <!-- PROFILE SETTINGS -->
+            <article class="profileWrapper  mx-auto mt-5 col-10">
+                <form class="d-flex flex-column" action="profil.php" method="post">
+                    <label class="pt-3 pb-2 px-2 text-white" for="identidiant">Identifiant: </label>
+                    <input class="p-3" type="text" name="identifiant" id="identifiant"  value="<?php echo $_SESSION['username'];?>" disabled>
+                    <label class="pt-3 pb-2 px-2 text-white" for="mp">Nouveau Mot de Passe: </label>
+                    <input class="p-3" type="password" name="mp" id="mp" required>
+                    <input class="btn btn-reg text-white p-3 mt-3" type="submit" value="Confirmer">
+                </form>
+           </article>
         </div>
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent dashContentStudent mt5 d-flex justify-content-around align-items-top">

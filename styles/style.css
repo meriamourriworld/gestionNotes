@@ -76,6 +76,14 @@
 {
     background-color: #ab2936;
 }
+.btn-purple
+{
+    background-color: #340448;
+}
+.btn-purple:hover
+{
+    background-color: #4c076a;
+}
 .error
 {
     color: #f7a1a9;
@@ -360,4 +368,8 @@ h3.notifSideBarTitle
     {
         bottom: 23px;
     }
+}
+/****************************************PROFILE**************************************/
+article.profileWrapper
+{
 }
