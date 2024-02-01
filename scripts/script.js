@@ -8,20 +8,56 @@ notifBell.addEventListener("click", ()=>
 
 //Managing settings student click
 const settings = document.querySelector(".setting");
-
-settings.addEventListener("click", ()=>
+if(settings)
 {
-    const settingWindow = document.querySelector(".settingWindow");
-    settingWindow.classList.toggle("display");
-});
+    settings.addEventListener("click", ()=>
+    {
+        const settingWindow = document.querySelector(".settingWindow");
+        settingWindow.classList.toggle("display");
+    });
+}
 
 //Info card to show details about the course
 const btns = document.querySelectorAll(".matiereHoraire svg");
-btns.forEach((element,index) => {
-    element.addEventListener("click", ()=>
-    {
-        const popup = document.querySelectorAll(".matiereHoraireDetails")[index];
-        popup.classList.toggle("display");
-    
+if(btns)
+{
+    btns.forEach((element,index) => {
+        element.addEventListener("click", ()=>
+        {
+            const popup = document.querySelectorAll(".matiereHoraireDetails")[index];
+            popup.classList.toggle("display");
+        
+        });
     });
-});
+}
+
+/****************************Liste des comptes utilisateurs avec JSGRID**********************************/  
+if($("#jsFrid"))      
+{
+    $("#jsGrid").jsGrid({
+        width: "60%", 
+        inserting: true,
+        sorting: true,
+        editing: true,
+        filtering: true,
+        paging: true,
+        autoload: true,
+        deleteConfirm: "Voulez-vous vraiment supprimer cet enregistrement?",
+ 
+        fields: [
+            { name: "idUser", type: "text", width: "auto", visible: false },
+            { name: "Identifiant", type: "text", width: "auto", validate: "required"},
+            { name: "Role", type: "select", items: ["", "professeur", "etudiant"], validate: "required",
+            validate: function(value)
+            {
+                if(value != 0) return true;
+            }
+            },
+            { name: "Nom", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "Prenom", type: "text", width: "auto", editing: false, inserting: false},
+            // { name: "Nom", type: "select", items: countries, valueField: "Id", textField: "Name" },
+            // { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
+            { type: "control", width: "auto"}
+        ]
+    });
+}
