@@ -41,7 +41,7 @@ var clients = [
 
 $( document ).ready(function() {
     $("#jsGrid").jsGrid({
-        width: "60%", 
+        width: "40%", 
         inserting: true,
         sorting: true,
         editing: true,
@@ -60,46 +60,25 @@ $( document ).ready(function() {
             }
         },
         fields: [
-            { name: "idUser", type: "text", width: "auto" },
-            { name: "identifiant", type: "text", width: "auto", validate: "required"},
-            { name: "role", type: "select", items: ["", "professeur", "etudiant"], validate: "required",
-            validate: function(value)
-            {
-                if(value != 0) return true;
-            }
+            { name: "idUser", type: "text", width: "auto", visible: false },
+            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "auto",
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
             },
-            // { name: "Nom", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "role", type: "text", title: "RÔLE",
+                validate:{
+                    validator: function(value){
+                        return /^(professeur|etudiant)$/.test(value);
+                    },
+                    message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
+                }
+            },
+            // { name: "Nom", type: "text", width: "auto", editing: false, inserting: false},items: ["", "professeur", "etudiant"]
             // { name: "Prenom", type: "text", width: "auto", editing: false, inserting: false},
             // { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
-            { type: "control", width: "auto"}
+            { type: "control", width: "100px"}
         ]
     });
 });
-// $(document).ready(function() {
-//     $("#jsGrid").jsGrid({
-//         width: "100%",
-//         filtering: true,
-//         sorting: true,
-//         paging: true,
-//         autoload: true,
-//         pageSize: 10,
-//         pageButtonCount: 5,
-//         deleteConfirm: "Voulez-vous vraiment supprimer cet enregistrement ?",
-//         controller: {
-//             loadData: function() {
-//                 return $.ajax({
-//                     type: "GET",
-//                     data: clients,
-//                     // url: "../gestionComptes.php", // Assurez-vous que le chemin d'accès est correct
-//                     // dataType: "json", // Indiquez le type de données attendu du serveur
-//                 });
-//             }
-//         },
-//         fields: [
-//             { name: "idUser", type: "text", width: 50, title: "ID Utilisateur" },
-//             { name: "identifiant", type: "text", width: 100, title: "Identifiant" },
-//             { name: "role", type: "text", width: 100, title: "Rôle" },
-//             { type: "control", editButton: false, deleteButton: false } // Contrôles d'édition et de suppression
-//         ]
-//     });
-// });
