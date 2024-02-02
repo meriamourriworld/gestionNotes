@@ -1,16 +1,15 @@
-<?php 
+<?php
     session_start();
     include_once("connectDb.php");
-
-
-
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"]==false || $_SESSION["role"] != "admin")
     {
         header("location:connection.php");
+        exit;
     }
-   
-    
-?>
+   ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +83,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
     <!----------------------------jsGrid && jQuery CDN-------------------------------->
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
