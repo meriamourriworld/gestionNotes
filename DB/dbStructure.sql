@@ -29,8 +29,8 @@ CREATE TABLE Professeur(
     photoProf longblob,
     matiere varchar(10),
     profil int NULL,
-    FOREIGN KEY (matiere) REFERENCES Matiere(idMat),
-    FOREIGN KEY (profil) REFERENCES Utilisateur(idUser)
+    FOREIGN KEY (matiere) REFERENCES Matiere(idMat)ON DELETE SET NULL,
+    FOREIGN KEY (profil) REFERENCES Utilisateur(idUser)ON DELETE SET NULL
 );
 ALTER TABLE Professeur ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;
 
@@ -54,8 +54,8 @@ CREATE TABLE Etudiant(
     photoEtud longblob,
     classe varchar(10),
     profil int NULL,
-    FOREIGN KEY (classe) REFERENCES Classe(idClasse),
-    FOREIGN KEY (profil) REFERENCES Utilisateur(idUser)
+    FOREIGN KEY (classe) REFERENCES Classe(idClasse) ON DELETE SET NULL,
+    FOREIGN KEY (profil) REFERENCES Utilisateur(idUser) ON DELETE SET NULL
 );
 ALTER TABLE Etudiant ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;
 
@@ -64,19 +64,16 @@ CREATE table Devoir(
     titreDev varchar(30),
     descDev varchar(100),
     dateEcheance Date,
-    noteDev float,
     matiere varchar(10),
-    etudiant varchar(10),
-    FOREIGN KEY (matiere) REFERENCES Matiere(idMat),
-    FOREIGN KEY (etudiant) REFERENCES Etudiant(idEtud)
+    FOREIGN KEY (matiere) REFERENCES Matiere(idMat) ON DELETE SET NULL,
 );
 ALTER TABLE Devoir ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;
 
 CREATE TABLE ClasseProf(
 	classe varchar(10),
     professeur varchar(10),
-    FOREIGN KEY (classe) REFERENCES Classe(idClasse),
-    FOREIGN KEY (professeur) REFERENCES Professeur(idProf),
+    FOREIGN KEY (classe) REFERENCES Classe(idClasse) ON DELETE SET NULL,
+    FOREIGN KEY (professeur) REFERENCES Professeur(idProf) ON DELETE SET NULL,
     PRIMARY KEY (classe, professeur)
 );
 ALTER TABLE ClasseProf ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;
@@ -86,7 +83,7 @@ CREATE TABLE Notes (
     devoir varchar(10),
     note float,
     PRIMARY KEY(etudiant, devoir),
-    FOREIGN KEY (etudiant) REFERENCES etudiant(cne),
-    FOREIGN KEY (devoir) REFERENCES Devoir(idDev)
+    FOREIGN KEY (etudiant) REFERENCES etudiant(cne) ON DELETE SET NULL,
+    FOREIGN KEY (devoir) REFERENCES Devoir(idDev) ON DELETE SET NULL
 );
 ALTER table Notes ADD COLUMN id INT AUTO_INCREMENT UNIQUE FIRST;

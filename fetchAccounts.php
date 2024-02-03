@@ -63,11 +63,27 @@ include_once("connectDb.php");
       $stat->execute();
      }
       //DELETE CODE
-      if($_SERVER["REQUEST_METHOD"] == "DELETE")
-      {
+      if($_SERVER["REQUEST_METHOD"] == "DELETE") {
         parse_str(file_get_contents("php://input"), $_DELETE);
-        $sql="delete from utilisateur where idUser=".$_DELETE["idUser"];
-        $stat = $con->prepare($sql);
-        $stat->execute();
-      }
+        $id = $_DELETE["idUser"];
+        $role = $_DELETE["role"];
+        //SETTING FOREIGN KEY TO NULL
+        if($role == "professeur") {
+            $sql = "UPDATE professeur SET profil = NULL WHERE profil = :id";
+            $stmt = $con->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        } elseif($role == "etudiant") {
+            $sql = "UPDATE etudiant SET profil = NULL WHERE profil = :id";
+            $stmt = $con->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+        //DELETING ACCOUNT
+        $sql = "DELETE FROM utilisateur WHERE idUser = :id";
+        $stmt = $con->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
 ?>

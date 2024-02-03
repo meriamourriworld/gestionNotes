@@ -40,6 +40,7 @@ var clients = [
 ];
 
 $( document ).ready(function() {
+    //acounts grid
     $("#jsGrid").jsGrid({
         width: "45%", 
         height: "60vh",
@@ -84,6 +85,59 @@ $( document ).ready(function() {
                     data: item
                 });
             }
+        },
+        fields: [
+            { name: "idUser", type: "text", width: "auto",editing: false},
+            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px",
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
+            },
+            { name: "motPasse", title:"Mot Passe", type: "text", width: "80px", editing: false, validate: "required" },
+            { name: "role", type: "text", title: "RÔLE",
+              validate:{
+                    validator: function(value){
+                        return /^(professeur|etudiant)$/.test(value);
+                    },
+                    message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
+                }
+            },
+            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false},
+            { type: "control", width: "100px"}
+        ]
+    });
+
+    //Professeur without account
+    $("#profSansComptes").jsGrid({
+        width: "45%", 
+        height: "60vh",
+        inserting: false,
+        deleting: false,
+        sorting: true,
+        editing: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        controller:{
+            loadData: function()
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchPrAccounts.php",
+                    dataType: "json"
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchPrAccounts.php",
+                    data: item
+                });
+            },
         },
         fields: [
             { name: "idUser", type: "text", width: "auto", visible: false },

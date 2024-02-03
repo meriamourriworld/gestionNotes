@@ -73,10 +73,9 @@
         <section class="dashContent">
             <h2 class="text-center mt-5">Gestion des comptes</h2>
             
-            <article class="listeComptes">
-                <div id="jsGrid" class="mt-5 ms-5">
-
-                </div>
+            <article class="listeComptes d-flex">
+                <div id="jsGrid" class="mt-5 ms-2"></div>
+                <div id="profSansComptes" class="mt-5 ms-5"></div>
 
             </article>
         </section>
