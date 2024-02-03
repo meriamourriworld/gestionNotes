@@ -370,6 +370,11 @@ h3.notifSideBarTitle
     }
 }
 /****************************************PROFILE**************************************/
-article.profileWrapper
-{
-}
+
+.jsgrid-header-row>.header {
+    background:#340448;
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
+  }
+  

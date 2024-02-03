@@ -21,6 +21,7 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
     <link rel="stylesheet" href="./styles/style.css">
     <title>Tableau de bord - Admin!</title>
+
 </head>
 <body>
     <?php include_once("header.php");?>
@@ -73,7 +74,7 @@
             <h2 class="text-center mt-5">Gestion des comptes</h2>
             
             <article class="listeComptes">
-                <div id="jsGrid">
+                <div id="jsGrid" class="mt-5 ms-5 bg-danger">
 
                 </div>
 

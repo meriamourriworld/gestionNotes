@@ -61,13 +61,13 @@ $( document ).ready(function() {
         },
         fields: [
             { name: "idUser", type: "text", width: "auto", visible: false },
-            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "auto",
+            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px", css: "header",
                 validate:{
                     validator: "required",
                     message: function(){return "Le champs identifiant est obligatoire!";}
                 }
             },
-            { name: "role", type: "text", title: "RÔLE",
+            { name: "role", type: "text", title: "RÔLE", css: "header",
               validate:{
                     validator: function(value){
                         return /^(professeur|etudiant)$/.test(value);
@@ -75,10 +75,9 @@ $( document ).ready(function() {
                     message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
                 }
             },
-            { name: "nom",title: "NOM", type: "text", width: "auto"},
-            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto"},
-            // { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
-            { type: "control", width: "100px"}
+            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false,css: "header"},
+            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false,css: "header"},
+            { type: "control", width: "100px",css: "header"}
         ]
     });
 });
