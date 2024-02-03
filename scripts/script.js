@@ -68,15 +68,15 @@ $( document ).ready(function() {
                 }
             },
             { name: "role", type: "text", title: "RÔLE",
-                validate:{
+              validate:{
                     validator: function(value){
                         return /^(professeur|etudiant)$/.test(value);
                     },
                     message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
                 }
             },
-            // { name: "Nom", type: "text", width: "auto", editing: false, inserting: false},items: ["", "professeur", "etudiant"]
-            // { name: "Prenom", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "nom",title: "NOM", type: "text", width: "auto"},
+            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto"},
             // { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
             { type: "control", width: "100px"}
         ]
