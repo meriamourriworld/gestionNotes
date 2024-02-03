@@ -2,7 +2,7 @@
 include_once("connectDb.php");
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
-      $sql = "select idUser, identifiant, role, nomProf,prenomProf, nomEtud, prenomEtud 
+      $sql = "select idUser, identifiant, motPasse, role, nomProf,prenomProf, nomEtud, prenomEtud 
                 from utilisateur LEFT JOIN professeur
                 ON utilisateur.idUser = professeur.profil
                 LEFT JOIN etudiant
@@ -17,9 +17,11 @@ include_once("connectDb.php");
         $output[] = array(
             "idUser"      => $row["idUser"],
             "identifiant" => $row["identifiant"],
+            "motPasse"      => substr($row["motPasse"],0,8),
             "role"        => $row["role"],
             "nom"         => $nom,
-            "prenom"      => $prenom
+            "prenom"      => $prenom,
+
         );
     }
     
@@ -27,4 +29,20 @@ include_once("connectDb.php");
       echo json_encode($output);
       exit;
     }
+    if($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+      $id = $_POST["identifiant"];
+      $pass = password_hash($_POST["motPasse"], PASSWORD_DEFAULT);
+      $role = $_POST["role"];
+      
+      $sql= "insert into utilisateur(identifiant, motPasse, role) values(:id, :pass, :role)";
+      $statement = $con->prepare($sql);
+
+      $statement->bindParam(':id', $id);
+      $statement->bindParam(':pass', $pass);
+      $statement->bindParam(':role', $role);
+      $statement->execute();
+
+    }
+    
 ?>

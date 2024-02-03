@@ -41,12 +41,14 @@ var clients = [
 
 $( document ).ready(function() {
     $("#jsGrid").jsGrid({
-        width: "40%", 
+        width: "45%", 
+        height: "60vh",
         inserting: true,
         sorting: true,
         editing: true,
         filtering: true,
         paging: true,
+        pageSize: 5,
         autoload: true,
         deleteConfirm: "Voulez-vous vraiment supprimer cet enregistrement?",
         controller:{
@@ -54,20 +56,37 @@ $( document ).ready(function() {
             {
                 return $.ajax({
                     type: "GET",
-                    url: "fetch.php",
+                    url: "fetchAccounts.php",
                     dataType: "json"
+                });
+            },
+            insertItem: function(item)
+            {
+                return $.ajax({
+                    type: "POST",
+                    url: "fetchAccounts.php",
+                    data: item
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchAccounts.php",
+                    data: item
                 });
             }
         },
         fields: [
             { name: "idUser", type: "text", width: "auto", visible: false },
-            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px", css: "header",
+            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px",
                 validate:{
                     validator: "required",
                     message: function(){return "Le champs identifiant est obligatoire!";}
                 }
             },
-            { name: "role", type: "text", title: "RÔLE", css: "header",
+            { name: "motPasse", title:"Mot Passe", type: "text", width: "80px", editing: false, validate: "required" },
+            { name: "role", type: "text", title: "RÔLE",
               validate:{
                     validator: function(value){
                         return /^(professeur|etudiant)$/.test(value);
@@ -75,9 +94,9 @@ $( document ).ready(function() {
                     message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
                 }
             },
-            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false,css: "header"},
-            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false,css: "header"},
-            { type: "control", width: "100px",css: "header"}
+            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false},
+            { type: "control", width: "100px"}
         ]
     });
 });

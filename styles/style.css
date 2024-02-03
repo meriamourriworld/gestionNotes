@@ -369,12 +369,31 @@ h3.notifSideBarTitle
         bottom: 23px;
     }
 }
-/****************************************PROFILE**************************************/
-
-.jsgrid-header-row>.header {
+/****************************************ACCOUNTS**************************************/
+.jsgrid-grid-header
+{
+   overflow: auto;
+}
+.jsgrid-header-row > .jsgrid-header-cell
+{
     background:#340448;
     color: white;
     font-size: 0.8em;
     text-align: center;
+    height: max-content;
+    padding: 10px;
   }
-  
+  .jsgrid-filter-row > .jsgrid-cell
+  {
+    background-color: #8453df96;
+  }
+  .jsgrid-grid-body
+  {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dc3546 #340448 ;
+  }
+  .jsgrid-row > .jsgrid-cell
+  {
+    overflow: hidden;
+  }
