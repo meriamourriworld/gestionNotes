@@ -75,6 +75,14 @@ $( document ).ready(function() {
                     url: "fetchAccounts.php",
                     data: item
                 });
+            },
+            deleteItem: function(item)
+            {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "fetchAccounts.php",
+                    data: item
+                });
             }
         },
         fields: [

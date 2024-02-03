@@ -14,15 +14,18 @@ include_once("connectDb.php");
         $prenom="";
         if($row["role"] == "professeur"){$nom=$row["nomProf"];$prenom=$row["prenomProf"];}
         if($row["role"] == "etudiant"){$nom=$row["nomEtud"];$prenom=$row["prenomEtud"];}
-        $output[] = array(
+        if($row["role"]!="admin")
+        {
+          $output[] = array(
             "idUser"      => $row["idUser"],
             "identifiant" => $row["identifiant"],
             "motPasse"      => substr($row["motPasse"],0,8),
             "role"        => $row["role"],
             "nom"         => $nom,
             "prenom"      => $prenom,
-
         );
+        }
+
     }
       header("Content-Type: application/json");
       echo json_encode($output);
@@ -51,14 +54,20 @@ include_once("connectDb.php");
       $code = $_PUT["idUser"];
       $id = $_PUT["identifiant"];
       $role = $_PUT["role"];
-        if($role != "admin")
-        {
-          $sql= "update utilisateur set identifiant= :id, role=:role where idUser= :code";
-          $stat = $con->prepare($sql);
-          $stat->bindParam(':code', $code);
-          $stat->bindParam(':id', $id);
-          $stat->bindParam(':role', $role);
-          $stat->execute();
-        }
+
+      $sql= "update utilisateur set identifiant= :id, role=:role where idUser= :code";
+      $stat = $con->prepare($sql);
+      $stat->bindParam(':code', $code);
+      $stat->bindParam(':id', $id);
+      $stat->bindParam(':role', $role);
+      $stat->execute();
      }
+      //DELETE CODE
+      if($_SERVER["REQUEST_METHOD"] == "DELETE")
+      {
+        parse_str(file_get_contents("php://input"), $_DELETE);
+        $sql="delete from utilisateur where idUser=".$_DELETE["idUser"];
+        $stat = $con->prepare($sql);
+        $stat->execute();
+      }
 ?>
