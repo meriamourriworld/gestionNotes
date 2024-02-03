@@ -29,7 +29,7 @@
     <main class="dashAdmin d-flex">
         <!----------------------------SIDE MENU-------------------------------->
         <section class="sideMenu d-flex justify-content-center align-items-start">
-           <div class="sideMenuWrapper d-flex flex-column justify-content-around align-items-start mt-5">
+           <div class="sideMenuWrapper d-flex flex-column justify-content-around align-items-start py-5">
             
                 <div class="menu">
                     <span class="icone pe-3"><svg xmlns="http://www.w3.org/2000/svg" fill="#eec6ff" width="20" height="20" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M384 96V224H256V96H384zm0 192V416H256V288H384zM192 224H64V96H192V224zM64 288H192V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg></span>
@@ -73,9 +73,9 @@
         <section class="dashContent">
             <h2 class="text-center mt-5">Gestion des comptes</h2>
             
-            <article class="listeComptes d-flex">
+            <article class="listeComptes d-flex justify-content-center">
                 <div id="jsGrid" class="mt-5 ms-2"></div>
-                <div id="profSansComptes" class="mt-5 ms-5"></div>
+                <div id="profSansComptes" class="mt-5 ms-2"></div>
 
             </article>
         </section>

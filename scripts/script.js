@@ -33,17 +33,11 @@ if(btns)
 
 /****************************Liste des comptes utilisateurs avec JSGRID**********************************/ 
 
-var clients = [
-    { "idUser": "Otto Clay", "identifiant": 25, "role": 1},
-    { "idUser": "sdfkbg", "identifiant": 255, "role": 2},
-    { "idUser": "test", "identifiant": 122, "role": 2},
-];
-
 $( document ).ready(function() {
     //acounts grid
     $("#jsGrid").jsGrid({
-        width: "45%", 
-        height: "60vh",
+        width: "48%", 
+        height: "40vh",
         inserting: true,
         sorting: true,
         editing: true,
@@ -87,7 +81,7 @@ $( document ).ready(function() {
             }
         },
         fields: [
-            { name: "idUser", type: "text", width: "auto",editing: false},
+            { name: "idUser", type: "text", width: "auto",inserting: false ,editing: false},
             { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px",
                 validate:{
                     validator: "required",
@@ -111,8 +105,8 @@ $( document ).ready(function() {
 
     //Professeur without account
     $("#profSansComptes").jsGrid({
-        width: "45%", 
-        height: "60vh",
+        width: "50%", 
+        height: "40vh",
         inserting: false,
         deleting: false,
         sorting: true,
@@ -140,25 +134,13 @@ $( document ).ready(function() {
             },
         },
         fields: [
-            { name: "idUser", type: "text", width: "auto", visible: false },
-            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px",
-                validate:{
-                    validator: "required",
-                    message: function(){return "Le champs identifiant est obligatoire!";}
-                }
-            },
-            { name: "motPasse", title:"Mot Passe", type: "text", width: "80px", editing: false, validate: "required" },
-            { name: "role", type: "text", title: "RÔLE",
-              validate:{
-                    validator: function(value){
-                        return /^(professeur|etudiant)$/.test(value);
-                    },
-                    message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
-                }
-            },
-            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false},
-            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false},
-            { type: "control", width: "100px"}
+            { name: "id", type: "text", width: "auto", visible: false },
+            { name: "idProf", type: "text", title:"ID", width: "auto", editing: false},
+            { name: "nomProf", type: "text", title:"NOM", width: "100px", editing: false},
+            { name: "prenomProf", type: "text", title:"PRÉNOM", width: "100px", editing: false},
+            { name: "matiere", type: "text", title:"MATIÈRE", width: "100px", editing: false},
+            { name: "profil", type: "text", title:"PROFIL", width: "100px"},
+            { type: "control", width: "100px", deleteButton: false}
         ]
     });
 });
