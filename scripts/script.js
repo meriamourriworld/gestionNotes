@@ -36,7 +36,7 @@ if(btns)
 $( document ).ready(function() {
     //acounts grid
     $("#jsGrid").jsGrid({
-        width: "48%", 
+        width: "90%", 
         height: "40vh",
         inserting: true,
         sorting: true,
@@ -81,7 +81,7 @@ $( document ).ready(function() {
             }
         },
         fields: [
-            { name: "idUser", type: "text", width: "auto",inserting: false ,editing: false},
+            { name: "idUser", type: "text",title:"ID", width: "auto",inserting: false ,editing: false},
             { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px",
                 validate:{
                     validator: "required",
@@ -97,15 +97,15 @@ $( document ).ready(function() {
                     message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
                 }
             },
-            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false},
-            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "nom",title: "NOM", type: "text", width: "100px", editing: false, inserting: false},
+            { name: "prenom", title: "PRÉNOM", type: "text", width: "100px", editing: false, inserting: false},
             { type: "control", width: "100px"}
         ]
     });
 
     //Professeur without account
     $("#profSansComptes").jsGrid({
-        width: "50%", 
+        width: "100%", 
         height: "40vh",
         inserting: false,
         deleting: false,
@@ -140,6 +140,48 @@ $( document ).ready(function() {
             { name: "prenomProf", type: "text", title:"PRÉNOM", width: "100px", editing: false},
             { name: "matiere", type: "text", title:"MATIÈRE", width: "100px", editing: false},
             { name: "profil", type: "text", title:"PROFIL", width: "100px"},
+            { type: "control", width: "100px", deleteButton: false}
+        ]
+    });
+
+
+    //Étudiants without account
+    $("#etudSansComptes").jsGrid({
+        width: "100%", 
+        height: "40vh",
+        inserting: false,
+        deleting: false,
+        sorting: true,
+        editing: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        controller:{
+            loadData: function()
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchStAccounts.php",
+                    dataType: "json"
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchStAccounts.php",
+                    data: item
+                });
+            },
+        },
+        fields: [
+            { name: "id", type: "text", width: "auto", visible: false },
+            { name: "cne", type: "text", title:"CNE", width: "auto", editing: false},
+            { name: "nomEtud", type: "text", title:"NOM", width: "auto", editing: false},
+            { name: "prenomEtud", type: "text", title:"PRÉNOM", width: "auto", editing: false},
+            { name: "classe", type: "text", title:"CLASSE", width: "auto", editing: false},
+            { name: "profil", type: "text", title:"PROFIL", width: "auto"},
             { type: "control", width: "100px", deleteButton: false}
         ]
     });

@@ -397,3 +397,16 @@ h3.notifSideBarTitle
   {
     overflow: hidden;
   }
+  .gridWrapper1
+  {
+    width: 100%;
+
+  }
+  .gridWrapper2
+  {
+    width: 50%;
+  }
+  .gridWrapper3
+  {
+    width: 50%;
+  }
