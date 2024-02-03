@@ -24,11 +24,12 @@ include_once("connectDb.php");
 
         );
     }
-    
       header("Content-Type: application/json");
       echo json_encode($output);
       exit;
     }
+
+     //POST CODE
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
       $id = $_POST["identifiant"];
@@ -42,7 +43,22 @@ include_once("connectDb.php");
       $statement->bindParam(':pass', $pass);
       $statement->bindParam(':role', $role);
       $statement->execute();
-
     }
-    
+     //PUT CODE
+     if($_SERVER["REQUEST_METHOD"] == "PUT")
+     {
+      parse_str(file_get_contents("php://input"), $_PUT);
+      $code = $_PUT["idUser"];
+      $id = $_PUT["identifiant"];
+      $role = $_PUT["role"];
+        if($role != "admin")
+        {
+          $sql= "update utilisateur set identifiant= :id, role=:role where idUser= :code";
+          $stat = $con->prepare($sql);
+          $stat->bindParam(':code', $code);
+          $stat->bindParam(':id', $id);
+          $stat->bindParam(':role', $role);
+          $stat->execute();
+        }
+     }
 ?>
