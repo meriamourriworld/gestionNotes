@@ -251,7 +251,7 @@ $( document ).ready(function() {
             { name: "objectifMat", title: "OBJECTIF", type: "text", width: "auto",
             validate:{
                 validator: "required",
-                message: function(){return "Le champs objectid est obligatoire!";}
+                message: function(){return "Le champs objectif est obligatoire!";}
             }
             },
             { name: "coefMat", title: "COEFFICIENT", type: "text", width: "auto",
@@ -263,5 +263,82 @@ $( document ).ready(function() {
             { type: "control", width: "100px"}
         ]
     });
-
+    /*****************************CLASSES************************************ */
+     //CLASSE grid
+     $("#jsGridClasses").jsGrid({
+        width: "90%", 
+        height: "75vh",
+        inserting: true,
+        sorting: true,
+        editing: true,
+        deleting: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        deleteConfirm: "Voulez-vous vraiment supprimer cette Classe?",
+        controller:{
+            loadData: function()
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchClasses.php",
+                    dataType: "json"
+                });
+            },
+            insertItem: function(item)
+            {
+                return $.ajax({
+                    type: "POST",
+                    url: "fetchClasses.php",
+                    data: item
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchClasses.php",
+                    data: item
+                });
+            },
+            deleteItem: function(item)
+            {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "fetchClasses.php",
+                    data: item
+                });
+            }
+        },
+        fields: [
+            { name: "id", type: "text", width: "auto",visible: false},
+            { name: "idClasse", title: "ID", type: "text", width: "auto", editing:false,
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
+            },
+            { name: "nomClasse", title: "LIBELLÉ", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs Libellé est obligatoire!";}
+            }
+            },
+            { name: "nbEtudiants", title: "NB ÉTUDIANTS", type: "number", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs Nombre étudiants est obligatoire et doit être un nombre!";}
+            }
+            },
+            { name: "niveauClasse", title: "NIVEAU", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs niveau est obligatoire!";}
+            }
+            },
+            { name: "descClasse", title: "DESCRIPTION", type: "text", width: "auto"},
+            { type: "control", width: "100px"}
+        ]
+    });
 });

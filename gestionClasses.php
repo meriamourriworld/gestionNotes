@@ -71,10 +71,10 @@
 
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent">
-            <h2 class="text-center mt-5">Gestion des Matières</h2>
+            <h2 class="text-center mt-5">Gestion des Classes</h2>
             
-            <article class="listeMatieres mt-5 d-flex justify-content-center">
-                <div id="jsGridMatieres"></div>
+            <article class="listeClasses mt-5 d-flex justify-content-center">
+                <div id="jsGridClasses"></div>
 
             </article>
         </section>
