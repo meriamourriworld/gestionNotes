@@ -82,13 +82,13 @@ $( document ).ready(function() {
         },
         fields: [
             { name: "idUser", type: "text",title:"ID", width: "auto",inserting: false ,editing: false},
-            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "100px",
+            { name: "identifiant", type: "text", title:"IDENTIFIANT", width: "auto",
                 validate:{
                     validator: "required",
                     message: function(){return "Le champs identifiant est obligatoire!";}
                 }
             },
-            { name: "motPasse", title:"Mot Passe", type: "text", width: "80px", editing: false, validate: "required" },
+            { name: "motPasse", title:"Mot Passe", type: "text", width: "auto", editing: false, validate: "required" },
             { name: "role", type: "text", title: "RÔLE",
               validate:{
                     validator: function(value){
@@ -97,8 +97,8 @@ $( document ).ready(function() {
                     message: function(){return "Le rôle doit être soit: professeur OU etudiant !";}
                 }
             },
-            { name: "nom",title: "NOM", type: "text", width: "100px", editing: false, inserting: false},
-            { name: "prenom", title: "PRÉNOM", type: "text", width: "100px", editing: false, inserting: false},
+            { name: "nom",title: "NOM", type: "text", width: "auto", editing: false, inserting: false},
+            { name: "prenom", title: "PRÉNOM", type: "text", width: "auto", editing: false, inserting: false},
             { type: "control", width: "100px"}
         ]
     });
@@ -185,4 +185,83 @@ $( document ).ready(function() {
             { type: "control", width: "100px", deleteButton: false}
         ]
     });
+
+    /*****************************MATIERES************************************ */
+     //MATIERE grid
+     $("#jsGridMatieres").jsGrid({
+        width: "90%", 
+        height: "75vh",
+        inserting: true,
+        sorting: true,
+        editing: true,
+        deleting: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        deleteConfirm: "Voulez-vous vraiment supprimer cette Matière?",
+        controller:{
+            loadData: function()
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchMatieres.php",
+                    dataType: "json"
+                });
+            },
+            insertItem: function(item)
+            {
+                return $.ajax({
+                    type: "POST",
+                    url: "fetchMatieres.php",
+                    data: item
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchMatieres.php",
+                    data: item
+                });
+            },
+            deleteItem: function(item)
+            {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "fetchMatieres.php",
+                    data: item
+                });
+            }
+        },
+        fields: [
+            { name: "id", type: "text", width: "auto",visible: false},
+            { name: "idMat", title: "ID", type: "text", width: "auto", editing:false,
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
+            },
+            { name: "nomMat", title: "TITRE", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs Titre est obligatoire!";}
+            }
+            },
+            { name: "objectifMat", title: "OBJECTIF", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs objectid est obligatoire!";}
+            }
+            },
+            { name: "coefMat", title: "COEFFICIENT", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs coefficient est obligatoire!";}
+            }
+            },
+            { type: "control", width: "100px"}
+        ]
+    });
+
 });

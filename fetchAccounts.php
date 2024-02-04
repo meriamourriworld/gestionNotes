@@ -19,7 +19,7 @@ include_once("connectDb.php");
           $output[] = array(
             "idUser"      => $row["idUser"],
             "identifiant" => $row["identifiant"],
-            "motPasse"      => substr($row["motPasse"],0,8),
+            "motPasse"      => substr($row["motPasse"],0,10),
             "role"        => $row["role"],
             "nom"         => $nom,
             "prenom"      => $prenom,
