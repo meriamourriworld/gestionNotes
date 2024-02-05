@@ -368,30 +368,44 @@ $( document ).ready(function() {
             },
             insertItem: function(item)
             {
+                var formData = new FormData();
+                formData.append("idProf", item.idProf);
+                formData.append("nomProf", item.nomProf);
+                formData.append("prenomProf", item.prenomProf);
+                formData.append("dateNaissance", item.dateNaissance);
+                formData.append("adresseProf", item.adresseProf);
+                formData.append("mailProf", item.mailProf);
+                formData.append("telProf", item.telProf);
+                formData.append("photoProf", item.photoProf);
+                formData.append("matiere", item.matiere);
+                formData.append("profil", item.profil);
                 return $.ajax({
                     type: "POST",
                     url: "fetchProfesseurs.php",
-                    data: item
+                    contentType: false,
+                    processData: false,
+                    data: formData
                 });
             },
             updateItem: function(item)
-            {
-                // var updatedItem = args.item;
-                // var formData = new FormData();
-                // formData.append("image", updatedItem.image); 
-                // console.log(updatedItem.image);
-                // formData.append("nomProf", updatedItem.nomProf);
-                // formData.append("prenomProf", updatedItem.prenomProf);
-                // formData.append("dateNaissance", updatedItem.dateNaissance);
-                // formData.append("adresseProf", updatedItem.adresseProf);
-                // formData.append("mailProf", updatedItem.mailProf);
-                // formData.append("telProf", updatedItem.telProf);
+            {   
+                var formData = new FormData();
+                formData.append("idProf", item.idProf);
+                formData.append("nomProf", item.nomProf);
+                formData.append("prenomProf", item.prenomProf);
+                formData.append("dateNaissance", item.dateNaissance);
+                formData.append("adresseProf", item.adresseProf);
+                formData.append("mailProf", item.mailProf);
+                formData.append("telProf", item.telProf);
+                formData.append("photoProf", item.photoProf);
+                formData.append("matiere", item.matiere);
+                formData.append("profil", item.profil);
                 return $.ajax({
                     type: "PUT",
                     url: "fetchProfesseurs.php",
                     contentType: false,
                     processData: false,
-                    data: item
+                    data: formData
                 });
             },
             deleteItem: function(item)
@@ -403,6 +417,7 @@ $( document ).ready(function() {
                 });
             }
         },
+
         fields: [
             { name: "id", type: "text", width: "auto",visible: false},
             { name: "idProf", title: "ID", type: "text", width: "auto", editing:false,
@@ -422,16 +437,34 @@ $( document ).ready(function() {
                     if(value != null) return '<img src="data:image/png;base64,' + value + '" width="45" height="45">';
                     else return "";
                 },
-               editTemplate: function() {
-                    var editControl = this.editControl = $("<input>").prop("type", "file");
-                    console.log("editControl" + editControl);
+               insertTemplate: function() {
+                    var editControl = document.createElement("input");
+                    editControl.setAttribute("type", "file");
+                    editControl.setAttribute("id", "photoProf");
+                    return editControl;
+                },
+                insertValue: function(value, item) {
+                    if(document.getElementById('photoProf'))
+                    {
+                        var fileInput = document.getElementById('photoProf');
+                        var file = fileInput.files[0];
+                        return file;
+                    }
+                },
+                editTemplate: function() {
+                    var editControl = document.createElement("input");
+                    editControl.setAttribute("type", "file");
+                    editControl.setAttribute("id", "photoProf");
                     return editControl;
                 },
                 editValue: function(value, item) {
-                    if(this.editControl[0].files[0]) return this.editControl[0].files[0];
-                   return "";
-                },
-                
+                    if(document.getElementById('photoProf'))
+                    {
+                        var fileInput = document.getElementById('photoProf');
+                        var file = fileInput.files[0];
+                        return file;
+                    }
+                }
             },
             { name: "matiere", title: "MATIÈRE", type: "text", width: "auto"},
             { name: "profil", title: "PROFIL", type: "number", width: "auto"},

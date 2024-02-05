@@ -35,13 +35,13 @@ include_once("connectDb.php");
         $adresseProf     = $_POST["adresseProf"];
         $mailProf        = $_POST["mailProf"];
         $telProf         = $_POST["telProf"];
-        $photoProf       = $_POST["photoProf"];
+        $photoProf       = file_get_contents($_FILES['photoProf']['tmp_name']); 
         $matiere         = $_POST["matiere"];
         $profil          = $_POST["profil"];
 
-      $sql= "insert into professeur(idProf,nomProf,prenomProf,dateNaissance,adresseProf,mailProf,telProf,photoProf,matiere,profil)
-             values( :idProf, :nomProf, :prenomProf, :dateNaissance, :adresseProf, :mailProf, :telProf, :photoProf, :matiere, :profil)";
-      $statement = $con->prepare($sql);
+      $sql= "insert into professeur(idProf,nomProf,prenomProf,dateNaissance,adresseProf,mailProf, photoProf,telProf,matiere,profil)
+             values( :idProf, :nomProf, :prenomProf, :dateNaissance, :adresseProf, :mailProf, :photoProf, :telProf, :matiere, :profil)";
+      $stat = $con->prepare($sql);
 
       $stat->bindParam(':idProf', $idProf);
       $stat->bindParam(':nomProf', $nomProf);
@@ -53,16 +53,14 @@ include_once("connectDb.php");
       $stat->bindParam(':photoProf', $photoProf);
       $stat->bindParam(':matiere', $matiere);
       $stat->bindParam(':profil', $profil, PDO::PARAM_INT);
-      $statement->execute();
+      $stat->execute();
     }
 
      //PUT CODE
      if($_SERVER["REQUEST_METHOD"] == "PUT")
      {
       parse_str(file_get_contents("php://input"), $_PUT);
-      $image = file_get_contents($_PUT["photoProf"]); 
-      $image = addslashes($image); 
-  
+
       $idProf          = $_PUT["idProf"];
       $nomProf         = $_PUT["nomProf"];
       $prenomProf      = $_PUT["prenomProf"];
@@ -70,13 +68,13 @@ include_once("connectDb.php");
       $adresseProf     = $_PUT["adresseProf"];
       $mailProf        = $_PUT["mailProf"];
       $telProf         = $_PUT["telProf"];
-      $photoProf       = $image;
+      $photoProf       = file_get_contents($_FILES['photoProf']['tmp_name']); 
       $matiere         = $_PUT["matiere"];
       $profil          = $_PUT["profil"];
 
 
-      $sql= "update professeur set nomProf=:nomProf, prenomProf=:prenomProf, dateNaissance=:dateNaissance,
-            adresseProf=:adresseProf, mailProf=:mailProf, telProf=:telProf,  matiere=:matiere, profil=:profil
+      $sql= "update professeur set nomProf= :nomProf, prenomProf= :prenomProf, dateNaissance= :dateNaissance,
+            adresseProf= :adresseProf, mailProf= :mailProf, telProf= :telProf, photoProf= :photoProf, matiere= :matiere, profil= :profil
              where idProf = :idProf";
 
       $stat = $con->prepare($sql);
