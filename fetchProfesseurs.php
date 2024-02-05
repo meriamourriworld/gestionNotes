@@ -54,6 +54,7 @@ include_once("connectDb.php");
       $stat->bindParam(':matiere', $matiere);
       $stat->bindParam(':profil', $profil, PDO::PARAM_INT);
       $stat->execute();
+      header("location:gestionProfesseurs.php");
     }
 
      //PUT CODE

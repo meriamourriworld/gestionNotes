@@ -384,8 +384,12 @@ $( document ).ready(function() {
                     url: "fetchProfesseurs.php",
                     contentType: false,
                     processData: false,
-                    data: formData
-                });
+                    data: formData,
+                    success: function(response) {
+                            console.log("success");
+                            $("#jsGridProfesseurs").jsGrid("loadData");
+                    }
+            });
             },
             updateItem: function(item)
             {   
