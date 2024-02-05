@@ -197,7 +197,7 @@ $( document ).ready(function() {
         deleting: true,
         filtering: true,
         paging: true,
-        pageSize: 5,
+        pageSize: 3,
         autoload: true,
         deleteConfirm: "Voulez-vous vraiment supprimer cette Matière?",
         controller:{
@@ -278,7 +278,7 @@ $( document ).ready(function() {
         autoload: true,
         deleteConfirm: "Voulez-vous vraiment supprimer cette Classe?",
         controller:{
-            loadData: function()
+            loadData: function(filter)
             {
                 return $.ajax({
                     type: "GET",
@@ -338,6 +338,104 @@ $( document ).ready(function() {
             }
             },
             { name: "descClasse", title: "DESCRIPTION", type: "text", width: "auto"},
+            { type: "control", width: "100px"}
+        ]
+    });
+
+    /*****************************PROFESSEURS************************************ */
+
+     //PROFESSEUR grid
+     $("#jsGridProfesseurs").jsGrid({
+        width: "90%", 
+        height: "75vh",
+        inserting: true,
+        sorting: true,
+        editing: true,
+        deleting: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        deleteConfirm: "Voulez-vous vraiment archiver ce professeur ?",
+        controller:{
+            loadData: function(filter)
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchProfesseurs.php",
+                    dataType: "json"
+                });
+            },
+            insertItem: function(item)
+            {
+                return $.ajax({
+                    type: "POST",
+                    url: "fetchProfesseurs.php",
+                    data: item
+                });
+            },
+            updateItem: function(item)
+            {
+                // var updatedItem = args.item;
+                // var formData = new FormData();
+                // formData.append("image", updatedItem.image); 
+                // console.log(updatedItem.image);
+                // formData.append("nomProf", updatedItem.nomProf);
+                // formData.append("prenomProf", updatedItem.prenomProf);
+                // formData.append("dateNaissance", updatedItem.dateNaissance);
+                // formData.append("adresseProf", updatedItem.adresseProf);
+                // formData.append("mailProf", updatedItem.mailProf);
+                // formData.append("telProf", updatedItem.telProf);
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchProfesseurs.php",
+                    contentType: false,
+                    processData: false,
+                    data: item
+                });
+            },
+            deleteItem: function(item)
+            {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "fetchProfesseurs.php",
+                    data: item
+                });
+            }
+        },
+        fields: [
+            { name: "id", type: "text", width: "auto",visible: false},
+            { name: "idProf", title: "ID", type: "text", width: "auto", editing:false,
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
+            },
+            { name: "nomProf", title: "NOM", type: "text", width: "auto"},
+            { name: "prenomProf", title: "PRÉNOM", type: "text", width: "auto"},
+            { name: "dateNaissance", title: "NAISSANCE", type: "text", width: "auto"},
+            { name: "adresseProf", title: "ADRESSE", type: "textarea", width: "auto"},
+            { name: "mailProf", title: "MAIL", type: "text", width: "auto"},
+            { name: "telProf", title: "TÉLÉPHONE", type: "text", width: "auto"},
+            { name: "photoProf", title: "PHOTO", type: "imageUploader", width: "200px", align: "center",editing: true,
+                itemTemplate: function(value, item) {
+                    if(value != null) return '<img src="data:image/png;base64,' + value + '" width="45" height="45">';
+                    else return "";
+                },
+               editTemplate: function() {
+                    var editControl = this.editControl = $("<input>").prop("type", "file");
+                    console.log("editControl" + editControl);
+                    return editControl;
+                },
+                editValue: function(value, item) {
+                    if(this.editControl[0].files[0]) return this.editControl[0].files[0];
+                   return "";
+                },
+                
+            },
+            { name: "matiere", title: "MATIÈRE", type: "text", width: "auto"},
+            { name: "profil", title: "PROFIL", type: "number", width: "auto"},
+
             { type: "control", width: "100px"}
         ]
     });

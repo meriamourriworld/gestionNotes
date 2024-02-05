@@ -6,6 +6,7 @@
         header("location:connection.php");
         exit;
     }
+    
    ?>
 
 
@@ -71,23 +72,10 @@
 
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent">
-            <h2 class="text-center mt-5">Gestion des comptes</h2>
+            <h2 class="text-center mt-5">Gestion des Professeurs</h2>
             
-            <article class="listeComptes d-flex justify-content-center flex-wrap">
-                <div class="gridWrapper1  d-flex flex-column align-items-center">
-                    <h5>Liste des Comptes</h5>
-                    <div id="jsGrid" class="mt-2 mx-auto"></div>
-                </div>  
-                
-                <div class="gridWrapper2 d-flex flex-column align-items-center mt-5">
-                    <h5 >Liste des Profs sans comptes</h5>
-                    <div id="profSansComptes" class="mt-2 mx-auto"></div>
-                </div>  
-                
-                <div class="gridWrapper3 d-flex flex-column align-items-center mt-5">
-                    <h5>Liste des étudiants sans comptes</h5>
-                    <div id="etudSansComptes" class="mt-2 mx-auto"></div>
-                </div>  
+            <article class="listeClasses mt-5 d-flex justify-content-center">
+                <div id="jsGridProfesseurs"></div>
 
             </article>
         </section>
