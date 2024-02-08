@@ -4,7 +4,7 @@ include_once("connectDb.php");
     {
       $sql = "select id,idProf, nomProf, prenomProf, matiere,profil
                 from professeur 
-                where profil IS NULL;";
+                where profil IS NULL or profil = 0;";
       $res = $con->query($sql);
       $output = array();
       while($row = $res->fetch(PDO::FETCH_ASSOC)) {

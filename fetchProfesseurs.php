@@ -56,49 +56,11 @@ include_once("connectDb.php");
       $stat->execute();
       header("location:gestionProfesseurs.php");
     }
-
-     //PUT CODE
-     if($_SERVER["REQUEST_METHOD"] == "PUT")
-     {
-      parse_str(file_get_contents("php://input"), $_PUT);
-
-      $idProf          = $_PUT["idProf"];
-      $nomProf         = $_PUT["nomProf"];
-      $prenomProf      = $_PUT["prenomProf"];
-      $dateNaissance   = $_PUT["dateNaissance"];
-      $adresseProf     = $_PUT["adresseProf"];
-      $mailProf        = $_PUT["mailProf"];
-      $telProf         = $_PUT["telProf"];
-      $photoProf       = file_get_contents($_FILES['photoProf']['tmp_name']); 
-      $matiere         = $_PUT["matiere"];
-      $profil          = $_PUT["profil"];
-
-
-      $sql= "update professeur set nomProf= :nomProf, prenomProf= :prenomProf, dateNaissance= :dateNaissance,
-            adresseProf= :adresseProf, mailProf= :mailProf, telProf= :telProf, photoProf= :photoProf, matiere= :matiere, profil= :profil
-             where idProf = :idProf";
-
-      $stat = $con->prepare($sql);
-      $stat->bindParam(':idProf', $idProf);
-      $stat->bindParam(':nomProf', $nomProf);
-      $stat->bindParam(':prenomProf', $prenomProf);
-      $stat->bindParam(':dateNaissance', $dateNaissance);
-      $stat->bindParam(':adresseProf', $adresseProf);
-      $stat->bindParam(':mailProf', $mailProf);
-      $stat->bindParam(':telProf', $telProf);
-      $stat->bindParam(':photoProf', $photoProf);
-      $stat->bindParam(':matiere', $matiere);
-      $stat->bindParam(':profil', $profil, PDO::PARAM_INT);
-      $stat->execute();
-     }
-
-
       //DELETE CODE
       if($_SERVER["REQUEST_METHOD"] == "DELETE") {
         parse_str(file_get_contents("php://input"), $_DELETE);
         
         $idProf = $_DELETE["idProf"];
-
         //SETTING FOREIGN KEY TO NULL
         $sql = "DELETE FROM classeprof WHERE professeur = :idProf";
         $stmt = $con->prepare($sql);

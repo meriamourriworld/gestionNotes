@@ -71,7 +71,7 @@
 
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent">
-            <h2 class="text-center mt-5">Gestion des Classes</h2>
+            <h2 class="text-center mt-5">Gestion des Étudiants</h2>
             
             <article class="listeEtudiants mt-5 d-flex justify-content-center">
                 <div id="jsGridEtudiants"></div>

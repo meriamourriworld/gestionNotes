@@ -17,7 +17,7 @@
         $sqlRes = $con->query($sql);
         $nbPrsansMat = $sqlRes->fetch(PDO::FETCH_ASSOC);
 
-        $sql = "select count(*) as 'nb' from professeur where profil IS null;"; //Nombre de professeurs sans profil
+        $sql = "select count(*) as 'nb' from professeur where profil IS null or profil = 0;"; //Nombre de professeurs sans profil
         $sqlRes = $con->query($sql);
         $nbPrsansProfil = $sqlRes->fetch(PDO::FETCH_ASSOC);
 
@@ -25,7 +25,7 @@
         $sqlRes = $con->query($sql);
         $nbEtsansClasse = $sqlRes->fetch(PDO::FETCH_ASSOC);
 
-        $sql = "select count(*) as 'nb' from etudiant where profil IS null;"; //Nombre d'étudiants sans profil
+        $sql = "select count(*) as 'nb' from etudiant where profil IS null or profil = 0;"; //Nombre d'étudiants sans profil
         $sqlRes = $con->query($sql);
         $nbEtsansProfil = $sqlRes->fetch(PDO::FETCH_ASSOC);
     }

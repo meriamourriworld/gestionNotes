@@ -415,3 +415,15 @@ h3.notifSideBarTitle
   {
     width: 50%;
   }
+
+#formMod label
+  {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .oldImg
+  {
+    height: 200px;
+    width: 200px;
+  }

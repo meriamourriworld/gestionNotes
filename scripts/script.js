@@ -343,20 +343,22 @@ $( document ).ready(function() {
     });
 
     /*****************************PROFESSEURS************************************ */
-
      //PROFESSEUR grid
      $("#jsGridProfesseurs").jsGrid({
-        width: "90%", 
+        width: "100%", 
         height: "75vh",
         inserting: true,
         sorting: true,
-        editing: true,
+        editing: false,
         deleting: true,
         filtering: true,
         paging: true,
         pageSize: 5,
         autoload: true,
         deleteConfirm: "Voulez-vous vraiment archiver ce professeur ?",
+        rowClick: function(args) { 
+            window.location.href= "modifierProfesseur.php?idProf='"+ args.item.idProf +"'";
+        },
         controller:{
             loadData: function(filter)
             {
@@ -386,31 +388,9 @@ $( document ).ready(function() {
                     processData: false,
                     data: formData,
                     success: function(response) {
-                            console.log("success");
-                            $("#jsGridProfesseurs").jsGrid("loadData");
+                        $("#jsGridProfesseurs").jsGrid("loadData");
                     }
             });
-            },
-            updateItem: function(item)
-            {   
-                var formData = new FormData();
-                formData.append("idProf", item.idProf);
-                formData.append("nomProf", item.nomProf);
-                formData.append("prenomProf", item.prenomProf);
-                formData.append("dateNaissance", item.dateNaissance);
-                formData.append("adresseProf", item.adresseProf);
-                formData.append("mailProf", item.mailProf);
-                formData.append("telProf", item.telProf);
-                formData.append("photoProf", item.photoProf);
-                formData.append("matiere", item.matiere);
-                formData.append("profil", item.profil);
-                return $.ajax({
-                    type: "PUT",
-                    url: "fetchProfesseurs.php",
-                    contentType: false,
-                    processData: false,
-                    data: formData
-                });
             },
             deleteItem: function(item)
             {
@@ -433,8 +413,8 @@ $( document ).ready(function() {
             { name: "nomProf", title: "NOM", type: "text", width: "auto"},
             { name: "prenomProf", title: "PRÉNOM", type: "text", width: "auto"},
             { name: "dateNaissance", title: "NAISSANCE", type: "text", width: "auto"},
-            { name: "adresseProf", title: "ADRESSE", type: "textarea", width: "auto"},
-            { name: "mailProf", title: "MAIL", type: "text", width: "auto"},
+            { name: "adresseProf", title: "ADRESSE", type: "textarea", width: "200px"},
+            { name: "mailProf", title: "MAIL", type: "text", width: "100px"},
             { name: "telProf", title: "TÉLÉPHONE", type: "text", width: "auto"},
             { name: "photoProf", title: "PHOTO", type: "imageUploader", width: "200px", align: "center",editing: true,
                 itemTemplate: function(value, item) {
@@ -452,20 +432,7 @@ $( document ).ready(function() {
                     {
                         var fileInput = document.getElementById('photoProf');
                         var file = fileInput.files[0];
-                        return file;
-                    }
-                },
-                editTemplate: function() {
-                    var editControl = document.createElement("input");
-                    editControl.setAttribute("type", "file");
-                    editControl.setAttribute("id", "photoProf");
-                    return editControl;
-                },
-                editValue: function(value, item) {
-                    if(document.getElementById('photoProf'))
-                    {
-                        var fileInput = document.getElementById('photoProf');
-                        var file = fileInput.files[0];
+                        console.log("FILE ins " +file);
                         return file;
                     }
                 }
@@ -476,4 +443,106 @@ $( document ).ready(function() {
             { type: "control", width: "100px"}
         ]
     });
+
+        /*****************************ETUDIANTS************************************ */
+     //ETUDIANT grid
+     $("#jsGridEtudiants").jsGrid({
+        width: "100%", 
+        height: "75vh",
+        inserting: true,
+        sorting: true,
+        editing: false,
+        deleting: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        deleteConfirm: "Voulez-vous vraiment archiver cet étudiant ?",
+        rowClick: function(args) { 
+            window.location.href= "modifierEtudiant.php?idEtud='"+ args.item.idEtud +"'";
+        },
+        controller:{
+            loadData: function(filter)
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchEtudiants.php",
+                    dataType: "json"
+                });
+            },
+            insertItem: function(item)
+            {
+                var formData = new FormData();
+                formData.append("cne", item.cne);
+                formData.append("nomEtud", item.nomEtud);
+                formData.append("prenomEtud", item.prenomEtud);
+                formData.append("dnEtud", item.dnEtud);
+                formData.append("adresseEtud", item.adresseEtud);
+                formData.append("mailEtud", item.mailEtud);
+                formData.append("telEtud", item.telEtud);
+                formData.append("photoEtud", item.photoEtud);
+                formData.append("classe", item.classe);
+                formData.append("profil", item.profil);
+                return $.ajax({
+                    type: "POST",
+                    url: "fetchEtudiants.php",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function(response) {
+                        $("#jsGridEtudiants").jsGrid("loadData");
+                    }
+            });
+            },
+            deleteItem: function(item)
+            {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "fetchEtudiants.php",
+                    data: item
+                });
+            }
+        },
+
+        fields: [
+            { name: "id", type: "text", width: "auto",visible: false},
+            { name: "cne", title: "CNE", type: "text", width: "auto", editing:false,
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
+            },
+            { name: "nomEtud", title: "NOM", type: "text", width: "auto"},
+            { name: "prenomEtud", title: "PRÉNOM", type: "text", width: "auto"},
+            { name: "dnEtud", title: "NAISSANCE", type: "text", width: "auto"},
+            { name: "adresseEtud", title: "ADRESSE", type: "textarea", width: "200px"},
+            { name: "mailEtud", title: "MAIL", type: "text", width: "100px"},
+            { name: "telEtud", title: "TÉLÉPHONE", type: "text", width: "auto"},
+            { name: "photoEtud", title: "PHOTO", type: "imageUploader", width: "200px", align: "center",editing: true,
+                itemTemplate: function(value, item) {
+                    if(value != null) return '<img src="data:image/png;base64,' + value + '" width="45" height="45">';
+                    else return "";
+                },
+               insertTemplate: function() {
+                    var editControl = document.createElement("input");
+                    editControl.setAttribute("type", "file");
+                    editControl.setAttribute("id", "photoEtud");
+                    return editControl;
+                },
+                insertValue: function(value, item) {
+                    if(document.getElementById('photoEtud'))
+                    {
+                        var fileInput = document.getElementById('photoEtud');
+                        var file = fileInput.files[0];
+                        return file;
+                    }
+                }
+            },
+            { name: "classe", title: "CLASSE", type: "text", width: "auto"},
+            { name: "profil", title: "PROFIL", type: "number", width: "auto"},
+
+            { type: "control", width: "100px"}
+        ]
+    });
 });
+
