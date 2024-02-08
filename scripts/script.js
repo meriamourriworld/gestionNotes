@@ -458,7 +458,7 @@ $( document ).ready(function() {
         autoload: true,
         deleteConfirm: "Voulez-vous vraiment archiver cet étudiant ?",
         rowClick: function(args) { 
-            window.location.href= "modifierEtudiant.php?idEtud='"+ args.item.idEtud +"'";
+            window.location.href= "modifierEtudiant.php?cne='"+ args.item.cne +"'";
         },
         controller:{
             loadData: function(filter)
