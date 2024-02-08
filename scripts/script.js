@@ -439,7 +439,7 @@ $( document ).ready(function() {
             { name: "matiere", title: "MATIÈRE", type: "text", width: "auto"},
             { name: "profil", title: "PROFIL", type: "number", width: "auto"},
 
-            { type: "control", width: "100px"}
+            { type: "control", width: "100px", editButton: false}
         ]
     });
 
@@ -540,7 +540,7 @@ $( document ).ready(function() {
             { name: "classe", title: "CLASSE", type: "text", width: "auto"},
             { name: "profil", title: "PROFIL", type: "number", width: "auto"},
 
-            { type: "control", width: "100px"}
+            { type: "control", width: "100px", editButton: false}
         ]
     });
 });
