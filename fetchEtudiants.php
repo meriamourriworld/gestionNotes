@@ -39,8 +39,9 @@ include_once("connectDb.php");
         $classe         = $_POST["classe"];
         $profil          = $_POST["profil"];
 
-      $sql= "insert into etudiant(cne, nomEtud,prenomEtud,dnEtud,adresseEtud,mailEtud,telEtud,photoEtud, classe,profil)
-             values( :cne, :nomEtud, :prenomProf, :dateNaissance, :adresseProf, :mailProf,  :telProf, :photoEtud, :classe, :profil)";
+      $sql= "insert into etudiant(cne, nomEtud,prenomEtud,dnEtud,adresseEtud,mailEtud,telEtud,photoEtud, classe, profil)
+             values( :cne, :nomEtud, :prenomEtud, :dnEtud, :adresseEtud, :mailEtud,  :telEtud, :photoEtud, :classe, :profil)";
+             echo $profil;
       $stat = $con->prepare($sql);
 
       $stat->bindParam(':cne', $cne);
@@ -52,7 +53,7 @@ include_once("connectDb.php");
       $stat->bindParam(':telEtud', $telEtud);
       $stat->bindParam(':photoEtud', $photoEtud);
       $stat->bindParam(':classe', $classe);
-      $stat->bindParam(':profil', $profil);
+      $stat->bindParam(':profil', $profil, PDO::PARAM_INT);
       $stat->execute();
       header("location:gestionEtudiants.php");
     }

@@ -432,7 +432,6 @@ $( document ).ready(function() {
                     {
                         var fileInput = document.getElementById('photoProf');
                         var file = fileInput.files[0];
-                        console.log("FILE ins " +file);
                         return file;
                     }
                 }
