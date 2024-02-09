@@ -16,7 +16,12 @@ INSERT INTO Matiere(idMat, nomMat, objectifMat, coefMat) VALUES("SCI-200",
 
 -- DONNEES UTILISATEUR 
 INSERT INTO utilisateur(identifiant, motPasse, role) values("admin", "admin", "admin");
-INSERT INTO utilisateur(identifiant, motPasse, role) values("CHAM", "CHAMPASS", "professeur");
+INSERT INTO utilisateur(identifiant, motPasse, role) values("prof", "prof", "professeur");
+INSERT INTO utilisateur(identifiant, motPasse, role) values("etudiant", "etudiant", "etudiant");
 
 -- DONNEES CLASSE
 insert into classe(idClasse, nomClasse, nbEtudiants, niveauClasse, descClasse) VALUES("svta", "SVT-A", 30, "1ère année Bac", "Classe Branche Science de vie et de terre Groupe A");
+INSERT INTO `classe` (`id`, `idClasse`, `nomClasse`, `nbEtudiants`, `niveauClasse`, `descClasse`) VALUES
+(1, 'svta', 'SVT-A', 30, '1ère année Bac', 'Classe Branche Science de vie et de terre Groupe A'),
+(2, 'svtb', 'SVT-B', 34, 'BAC', 'Desription de la classe BAC'),
+(4, 'pha', 'PHY-A', 30, '1ère année  Bac', 'Classe branche Physique Groupe A');
