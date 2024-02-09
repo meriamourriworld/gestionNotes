@@ -661,9 +661,12 @@ $( document ).ready(function() {
             },
             updateItem: function(item)
             {
+                var selectDevoir = $("#devoirs").val();
+                item.devoir = selectDevoir;
+                console.log("Selection "+ item.devoir);
                 return $.ajax({
                     type: "PUT",
-                    url: "fetchDevoirs.php",
+                    url: "fetchNotes.php",
                     data: item
                 });
             },
@@ -673,7 +676,7 @@ $( document ).ready(function() {
             { name: "nomEtud", title: "NOM", type: "text", width: "auto", editing:false},
             { name: "prenomEtud", title: "PRÉNOM", type: "text", width: "auto", editing:false},
             { name: "classe", title: "CLASSE", type: "text", width: "auto", editing:false},
-            { name: "note", title: "NOTE", type: "number", width: "auto"},
+            { name: "note", title: "NOTE", type: "text", width: "auto", validate: "required"},
             { type: "control", width: "100px", deleteButton: false, insertButton: false}
         ]
     });

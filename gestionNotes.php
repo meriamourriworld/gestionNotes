@@ -61,7 +61,6 @@
                 <label class="col-2 p-2" for="devoirs">Devoir à noter :</label>
                 <select name="devoirs" id="devoirs" class="col-5 p-2">
                     <?php
-                    echo "COOK". $_COOKIE['idMat'];
                         $sqlDev = "select idDev, titreDev from devoir where matiere='".$_COOKIE['idMat']."';";
                         $resDev = $con->query($sqlDev);
                         while($devoir = $resDev->fetch(PDO::FETCH_ASSOC))

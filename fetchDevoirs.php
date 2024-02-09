@@ -36,6 +36,15 @@ include_once("connectDb.php");
       $statement->bindParam(':dateEcheance', $dateEcheance);
       $statement->bindParam(':matiere',$_COOKIE['idMat']);
       $statement->execute();
+
+       //Liste de tous les étudiants des différentes classes attribuées au professeur
+       $sqlLstEtud = "select * from etudiant where classe in (select classe from classeprof where professeur='".$_COOKIE["currentMatricule"]."') order by classe;";
+       $sqlLstEtudRes = $con->query($sqlLstEtud);
+       while($row = $sqlLstEtudRes->fetch(PDO::FETCH_ASSOC))
+       {
+        $req = "insert into notes(etudiant, devoir) values('".$row["cne"]."', '".$idDev."');";
+        $con->exec($req);
+       }
     }
      //PUT CODE
      if($_SERVER["REQUEST_METHOD"] == "PUT")
