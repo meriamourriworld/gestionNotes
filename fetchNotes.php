@@ -2,7 +2,7 @@
 include_once("connectDb.php");
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
-        $sqlLstEtud = "select * from etudiant where cne in (select etudiant from notes where devoir='".$_COOKIE['dev']."');";
+        $sqlLstEtud = "select * from etudiant where cne in (select etudiant from notes where note is null and devoir='".$_COOKIE['dev']."');";
         $sqlLstEtudRes = $con->query($sqlLstEtud);
       $output = array();
       while($row = $sqlLstEtudRes->fetch(PDO::FETCH_ASSOC)) {
