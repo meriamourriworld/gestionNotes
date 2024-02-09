@@ -51,3 +51,10 @@ INSERT INTO `classeprof` (`classe`, `professeur`) VALUES
 ('svtb', 'pr-NAM'),
 ('svta', 'pr-CHAS'),
 ('svta', 'pr-CHAM');
+
+--DONNEES UTILISATEUR
+INSERT INTO `utilisateur` (`identifiant`, `motPasse`, `role`) VALUES
+('admin', '$2y$10$sxuvls.3AlrUSDKaZsnbQOS9J5B6tiHWbfpvyJZzZ6ziv4igmC5yK', 'admin'),
+('CHAM', '$2y$10$E8J65KaHLDMyCybKl7yXf.Qx8kCXEXAm/FuzNKXTEV7vJFjrFxNbe', 'professeur'),
+('etudiant', '$2y$10$pdqvrabIFIxrDh/uwEb5IOc8c2tEs/F5z6QBQv4eASdNB9VaKSbdm', 'etudiant'),
+( 'NAM', '$2y$10$P5eyGXrCbqAhHgo1ZmOINeAjtmbuXiQSERzb2Tqb/u9lmJ12Fn1V.', 'professeur');

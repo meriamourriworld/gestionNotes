@@ -163,7 +163,7 @@
                 </div> 
 
                 <div class="col-5">
-                    <label for="classe">Matière :</label>
+                    <label for="classe">Classe :</label>
                     <select name="classe" id="classe" class="col-12 p-3">
                         <?php
                             $sqlClasse = "select idClasse, nomClasse from classe;";
@@ -172,7 +172,7 @@
                             {
                                 if($row["classe"] == $classe["idClasse"])
                                 {
-                                    echo "<option value='".$classe["ididClasseMat"]."' selected>".$classe["nomClasse"]."</option>";
+                                    echo "<option value='".$classe["idClasse"]."' selected>".$classe["nomClasse"]."</option>";
                                 }else
                                 {
                                     echo "<option value='".$classe["idClasse"]."'>".$classe["nomClasse"]."</option>";
