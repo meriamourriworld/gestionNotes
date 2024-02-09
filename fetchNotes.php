@@ -22,13 +22,13 @@ include_once("connectDb.php");
      if($_SERVER["REQUEST_METHOD"] == "PUT")
      {
       parse_str(file_get_contents("php://input"), $_PUT);
-      $devoir        = $_PUT["devoir"];
+      $devoir        = $_COOKIE["dev"];
       $cne          = $_PUT["cne"];
       $note         = $_PUT["note"];
 
-      $sql= "insert into notes(etudiant, devoir, note) values (:cne, :devoir, :note)";
+      $sql= "update notes set note= :note where etudiant = :etudiant and devoir= :devoir;";
       $statement = $con->prepare($sql);
-      $statement->bindParam(':cne', $cne);
+      $statement->bindParam(':etudiant', $cne);
       $statement->bindParam(':devoir', $devoir);
       $statement->bindParam(':note', $note);
       $statement->execute();
