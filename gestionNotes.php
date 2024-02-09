@@ -58,8 +58,8 @@
         <section class="dashContent">
             <h2 class="text-center mt-5">Gestion des Devoirs</h2>
             <div class="selectDevoirsWrapper col-8 p-3 mx-auto mt-5 d-flex justify-content-center">
-                <form action="gestionNotes1.php" method="get">
-                    <label class="col-2 p-2" for="devoirs">Devoir à noter :</label>
+                <form action="gestionNotes1.php" method="get" class="ms-5">
+                    <label class="col-4 p-2 text-white" for="devoirs">Devoir à noter :</label>
                     <select name="devoirs" id="devoirs" class="col-5 p-2">
                         <?php
                             $sqlDev = "select idDev, titreDev from devoir where matiere='".$_COOKIE['idMat']."';";
@@ -70,7 +70,7 @@
                             }
                         ?>
                     </select>
-                    <input type="submit" value="Charger la liste" class="btn btn-purple text-white p-3 mt-5 col-5">
+                    <input type="submit" value="Charger la liste" class="btn btn-purple text-white p-3 mt-5 col-9">
                 </form>
             </div>
         </section>

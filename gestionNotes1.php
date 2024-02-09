@@ -57,13 +57,26 @@
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent">
             <h2 class="text-center mt-5">Gestion des Devoirs</h2>
-        
-            <input type="hidden" name="devoirs" id="devoirs"value="<?php echo "dev ".$_GET["devoirs"]; ?>">            
-            
-            <article class="listeDevoirs mt-5 d-flex justify-content-center">
-                <div id="jsGridNotes">
+            <article class="d-flex justify-content-center col-12">
+                <div class="col-6 sectSansNotes mt-5">
+                    <h4 class="text-center text-white my-3">Liste des étudiants sans notes :</h4>
+                    
+                    <article class="listeDevoirs d-flex justify-content-center mt-2">
+                        <div id="jsGridNotes">
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-6 sectAvecNotes mt-5">
+                    <h4 class="text-center text-white my-3">Liste des notes :</h4>
+                    <article class="listeNotes d-flex justify-content-center mt-2">
+                        <div id="jsGridNotesEtudiants">
+                        </div>
+                    </article>
                 </div>
             </article>
+
+
         </section>
     </main>
   

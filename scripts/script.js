@@ -640,8 +640,8 @@ $( document ).ready(function() {
      if($("#jsGridNotes").length >0)
      {
      $("#jsGridNotes").jsGrid({
-        width: "90%", 
-        height: "75vh",
+        width: "100%", 
+        height: "50vh",
         inserting: false,
         sorting: true,
         editing: true,
@@ -653,11 +653,9 @@ $( document ).ready(function() {
         controller:{
             loadData: function(filter)
             {
-                // filter.devoirs = $("#devoirs").val();
                 return $.ajax({
                     type: "GET",
                     url: "fetchNotes.php",
-                    // data:filter,
                     dataType: "json"
                 });
             },
@@ -666,7 +664,11 @@ $( document ).ready(function() {
                 return $.ajax({
                     type: "PUT",
                     url: "fetchNotes.php",
-                    data: item
+                    data: item,
+                    success: function(response) {
+                        $("#jsGridNotes").jsGrid("loadData");
+                        $("#jsGridNotesEtudiants").jsGrid("loadData");
+                    }
                 });
             },
         },
@@ -675,6 +677,51 @@ $( document ).ready(function() {
             { name: "nomEtud", title: "NOM", type: "text", width: "auto", editing:false},
             { name: "prenomEtud", title: "PRÉNOM", type: "text", width: "auto", editing:false},
             { name: "classe", title: "CLASSE", type: "text", width: "auto", editing:false},
+            { name: "note", title: "NOTE", type: "text", width: "auto", validate: "required"},
+            { type: "control", width: "100px", deleteButton: false, insertButton: false}
+        ]
+    });
+     }
+
+       /*****************************NOTES/ETUDIANTS/DEVOIRS************************************ */
+     //Notes/etudiant/devoir grid
+     if($("#jsGridNotesEtudiants").length >0)
+     {
+     $("#jsGridNotesEtudiants").jsGrid({
+        width: "90%", 
+        height: "50vh",
+        inserting: false,
+        sorting: true,
+        editing: true,
+        deleting: false,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        controller:{
+            loadData: function(filter)
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchNotesDevoirs.php",
+                    dataType: "json"
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchNotesDevoirs.php",
+                    data: item,
+                    success: function(response) {
+                        $("#jsGridNotesEtudiants").jsGrid("loadData");
+                    }
+                });
+            },
+        },
+        fields: [
+            { name: "etudiant", title: "CNE", type: "text", width: "auto", editing:false},
+            { name: "devoir", title: "DEVOIR", type: "text", width: "auto", editing:false},
             { name: "note", title: "NOTE", type: "text", width: "auto", validate: "required"},
             { type: "control", width: "100px", deleteButton: false, insertButton: false}
         ]

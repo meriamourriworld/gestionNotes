@@ -429,5 +429,14 @@ h3.notifSideBarTitle
   }
   div.selectDevoirsWrapper
   {
-    background-color: #4c076a99 !important;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #340448, #dc3546) ;
   }
+  .sectAvecNotes
+  {
+    background: linear-gradient(to bottom,#340448,#34044827);
+  }
+  .sectSansNotes
+{
+    background: linear-gradient(to bottom,#dc3546,#dc354627);
+}
