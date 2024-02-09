@@ -653,17 +653,16 @@ $( document ).ready(function() {
         controller:{
             loadData: function(filter)
             {
+                // filter.devoirs = $("#devoirs").val();
                 return $.ajax({
                     type: "GET",
                     url: "fetchNotes.php",
+                    // data:filter,
                     dataType: "json"
                 });
             },
             updateItem: function(item)
             {
-                var selectDevoir = $("#devoirs").val();
-                item.devoir = selectDevoir;
-                console.log("Selection "+ item.devoir);
                 return $.ajax({
                     type: "PUT",
                     url: "fetchNotes.php",

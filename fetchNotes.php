@@ -2,8 +2,7 @@
 include_once("connectDb.php");
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
-      //Liste de tous les étudiants des différentes classes attribuées au professeur
-        $sqlLstEtud = "select * from etudiant where classe in (select classe from classeprof where professeur='".$_COOKIE["currentMatricule"]."') order by classe;";
+        $sqlLstEtud = "select * from etudiant where cne in (select etudiant from notes where devoir='".$_COOKIE['dev']."');";
         $sqlLstEtudRes = $con->query($sqlLstEtud);
       $output = array();
       while($row = $sqlLstEtudRes->fetch(PDO::FETCH_ASSOC)) {

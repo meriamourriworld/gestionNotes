@@ -8,7 +8,7 @@
     {
         header("location:connection.php");
     }
-
+    setcookie('dev', $_GET["devoirs"], time() + (86400 * 30), "/");
     
 ?>
 <!DOCTYPE html>
@@ -57,22 +57,13 @@
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent">
             <h2 class="text-center mt-5">Gestion des Devoirs</h2>
-            <div class="selectDevoirsWrapper col-8 p-3 mx-auto mt-5 d-flex justify-content-center">
-                <form action="gestionNotes1.php" method="get">
-                    <label class="col-2 p-2" for="devoirs">Devoir à noter :</label>
-                    <select name="devoirs" id="devoirs" class="col-5 p-2">
-                        <?php
-                            $sqlDev = "select idDev, titreDev from devoir where matiere='".$_COOKIE['idMat']."';";
-                            $resDev = $con->query($sqlDev);
-                            while($devoir = $resDev->fetch(PDO::FETCH_ASSOC))
-                            {
-                                echo "<option value='".$devoir["idDev"]."'>".$devoir["titreDev"]."</option>";
-                            }
-                        ?>
-                    </select>
-                    <input type="submit" value="Charger la liste" class="btn btn-purple text-white p-3 mt-5 col-5">
-                </form>
-            </div>
+        
+            <input type="hidden" name="devoirs" id="devoirs"value="<?php echo "dev ".$_GET["devoirs"]; ?>">            
+            
+            <article class="listeDevoirs mt-5 d-flex justify-content-center">
+                <div id="jsGridNotes">
+                </div>
+            </article>
         </section>
     </main>
   
