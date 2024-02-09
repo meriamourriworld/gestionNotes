@@ -427,3 +427,7 @@ h3.notifSideBarTitle
     height: 200px;
     width: 200px;
   }
+  div.selectDevoirsWrapper
+  {
+    background-color: #4c076a99 !important;
+  }

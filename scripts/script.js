@@ -635,4 +635,47 @@ $( document ).ready(function() {
     });
      }
 
+        /*****************************NOTES************************************ */
+     //Notes grid
+     if($("#jsGridNotes").length >0)
+     {
+     $("#jsGridNotes").jsGrid({
+        width: "90%", 
+        height: "75vh",
+        inserting: false,
+        sorting: true,
+        editing: true,
+        deleting: false,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        controller:{
+            loadData: function(filter)
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchNotes.php",
+                    dataType: "json"
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchDevoirs.php",
+                    data: item
+                });
+            },
+        },
+        fields: [
+            { name: "cne", title: "CNE", type: "text", width: "auto", editing:false},
+            { name: "nomEtud", title: "NOM", type: "text", width: "auto", editing:false},
+            { name: "prenomEtud", title: "PRÉNOM", type: "text", width: "auto", editing:false},
+            { name: "classe", title: "CLASSE", type: "text", width: "auto", editing:false},
+            { name: "note", title: "NOTE", type: "number", width: "auto"},
+            { type: "control", width: "100px", deleteButton: false, insertButton: false}
+        ]
+    });
+     }
 });

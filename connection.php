@@ -34,6 +34,7 @@
                     {
                         $prof = $prof->fetch(PDO::FETCH_ASSOC);
                         $_SESSION["matricule"] = $prof["idProf"];
+                        setcookie('currentMatricule', $prof["idProf"], time() + (86400 * 30), "/");
                         header("location:vueEnsembleProf.php");
                     }else
                     {

@@ -2,15 +2,16 @@
 include_once("connectDb.php");
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
-      $sqlDev = "select idDev, titreDev, descDev, dateEcheance from devoir where matiere= '".$_COOKIE['idMat']."';";
-      $resDev = $con->query($sqlDev);
+      //Liste de tous les étudiants des différentes classes attribuées au professeur
+        $sqlLstEtud = "select * from etudiant where classe in (select classe from classeprof where professeur='".$_COOKIE["currentMatricule"]."') order by classe;";
+        $sqlLstEtudRes = $con->query($sqlLstEtud);
       $output = array();
-      while($row = $resDev->fetch(PDO::FETCH_ASSOC)) {
+      while($row = $sqlLstEtudRes->fetch(PDO::FETCH_ASSOC)) {
           $output[] = array(
-            "idDev"         => $row["idDev"],
-            "titreDev"        => $row["titreDev"],
-            "descDev"   => $row["descDev"],
-            "dateEcheance"       => $row["dateEcheance"],
+            "cne"         => $row["cne"],
+            "nomEtud"        => $row["nomEtud"],
+            "prenomEtud"   => $row["prenomEtud"],
+            "classe"       => $row["classe"],
         );
         }
       header("Content-Type: application/json");
