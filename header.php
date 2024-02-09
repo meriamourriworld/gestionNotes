@@ -33,12 +33,15 @@
     if($role == "professeur")
     {
         $matiere="";
-        $sql = "select nomMat from matiere m, professeur p  where m.idMat = p.matiere and p.idProf='".$_SESSION["matricule"]."';";
+        $sql = "select idMat,nomMat from matiere m, professeur p  where m.idMat = p.matiere and p.idProf='".$_SESSION["matricule"]."';";
         $sqlRes = $con->query($sql);
         if($sqlRes->rowcount() >0)
         {
             $matiere = $sqlRes->fetch(PDO::FETCH_ASSOC);
         }
+        //Mémoriser la matière du prof pour l'utiliser pour les opérations devoirs
+        setcookie('idMat', $matiere["idMat"], time() + (86400 * 30), "/");
+
         //Devoir dont il reste 1 jour pour la date limite
         $sql = "select idDev, titreDev from devoir where DATEDIFF(dateEcheance,CURDATE()) <=1 and matiere in (select matiere from professeur where idProf='".$_SESSION["matricule"]."');";
         $sqlRes = $con->query($sql);

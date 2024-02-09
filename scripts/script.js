@@ -35,6 +35,8 @@ if(btns)
 
 $( document ).ready(function() {
     //acounts grid
+    if($("#jsGrid").length >0)
+    {
     $("#jsGrid").jsGrid({
         width: "90%", 
         height: "40vh",
@@ -102,8 +104,10 @@ $( document ).ready(function() {
             { type: "control", width: "100px"}
         ]
     });
-
+    }
     //Professeur without account
+    if($("#profSansComptes").length >0)
+    {
     $("#profSansComptes").jsGrid({
         width: "100%", 
         height: "40vh",
@@ -143,9 +147,11 @@ $( document ).ready(function() {
             { type: "control", width: "100px", deleteButton: false}
         ]
     });
-
+    }
 
     //Étudiants without account
+    if($("#etudSansComptes").length >0)
+    {
     $("#etudSansComptes").jsGrid({
         width: "100%", 
         height: "40vh",
@@ -185,9 +191,11 @@ $( document ).ready(function() {
             { type: "control", width: "100px", deleteButton: false}
         ]
     });
-
+    }
     /*****************************MATIERES************************************ */
      //MATIERE grid
+     if($("#jsGridMatieres").length >0)
+    {
      $("#jsGridMatieres").jsGrid({
         width: "90%", 
         height: "75vh",
@@ -263,8 +271,11 @@ $( document ).ready(function() {
             { type: "control", width: "100px"}
         ]
     });
+}
     /*****************************CLASSES************************************ */
      //CLASSE grid
+     if($("#jsGridClasses").length >0)
+     {
      $("#jsGridClasses").jsGrid({
         width: "90%", 
         height: "75vh",
@@ -341,9 +352,11 @@ $( document ).ready(function() {
             { type: "control", width: "100px"}
         ]
     });
-
+     }
     /*****************************PROFESSEURS************************************ */
      //PROFESSEUR grid
+     if($("#jsGridProfesseurs").length >0)
+     {
      $("#jsGridProfesseurs").jsGrid({
         width: "100%", 
         height: "75vh",
@@ -442,9 +455,11 @@ $( document ).ready(function() {
             { type: "control", width: "100px", editButton: false}
         ]
     });
-
+     }
         /*****************************ETUDIANTS************************************ */
      //ETUDIANT grid
+     if($("#jsGridEtudiants").length >0)
+     {
      $("#jsGridEtudiants").jsGrid({
         width: "100%", 
         height: "75vh",
@@ -543,5 +558,81 @@ $( document ).ready(function() {
             { type: "control", width: "100px", editButton: false}
         ]
     });
-});
+}
 
+   /*****************************Devoirs************************************ */
+     //Devoirs grid
+     if($("#jsGridDevoirs").length >0)
+     {
+     $("#jsGridDevoirs").jsGrid({
+        width: "90%", 
+        height: "75vh",
+        inserting: true,
+        sorting: true,
+        editing: true,
+        deleting: true,
+        filtering: true,
+        paging: true,
+        pageSize: 5,
+        autoload: true,
+        deleteConfirm: "Voulez-vous vraiment supprimer ce Devoir ?",
+        controller:{
+            loadData: function(filter)
+            {
+                return $.ajax({
+                    type: "GET",
+                    url: "fetchDevoirs.php",
+                    dataType: "json"
+                });
+            },
+            insertItem: function(item)
+            {
+                return $.ajax({
+                    type: "POST",
+                    url: "fetchDevoirs.php",
+                    data: item
+                });
+            },
+            updateItem: function(item)
+            {
+                return $.ajax({
+                    type: "PUT",
+                    url: "fetchDevoirs.php",
+                    data: item
+                });
+            },
+            deleteItem: function(item)
+            {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "fetchDevoirs.php",
+                    data: item
+                });
+            }
+        },
+        fields: [
+            { name: "idDev", title: "ID", type: "text", width: "auto", editing:false,
+                validate:{
+                    validator: "required",
+                    message: function(){return "Le champs identifiant est obligatoire!";}
+                }
+            },
+            { name: "titreDev", title: "TITRE", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "Le champs TITRE est obligatoire!";}
+            }
+            },
+            { name: "descDev", title: "DESCRIPTION", type: "textarea", width: "auto"},
+            { name: "dateEcheance", title: "Date Échéance", type: "text", width: "auto",
+            validate:{
+                validator: "required",
+                message: function(){return "La date d'échéance est obligatoire !";}
+            }
+            },
+            { type: "control", width: "100px"}
+        ]
+    });
+     }
+
+});

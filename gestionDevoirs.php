@@ -10,33 +10,6 @@
     }
 
     
-    $nbEtudiants = 0;
-    $nbClasses = 0;
-
-
-    //Récupérer les stats des différents indices du système
-    //NOmbre d'étudiants par classe
-    $sqlStat = "select count(*) as 'nb' from etudiant where classe in (select classe from classeprof where professeur='".$_SESSION["matricule"]."');";
-    $sqlStatRes = $con->query($sqlStat);
-    $nbEtudiants = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
-    $nbEtudiants = $nbEtudiants["nb"];
-
-    //Nombre de classes du prof
-    $sqlStat = "select count(*) as 'nb' from classeprof where professeur='". $_SESSION["matricule"]."';";
-    $sqlStatRes = $con->query($sqlStat);
-    $nbClasses = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
-    $nbClasses = $nbClasses["nb"];
-
-    //Nombre de devoir en total
-    $sqlStat = "select count(*) as 'nb' from devoir where matiere in (select matiere from professeur where idProf='".$_SESSION["matricule"]."');";
-    $sqlStatRes = $con->query($sqlStat);
-    $nbDevoirs = $sqlStatRes->fetch(PDO::FETCH_ASSOC);
-    $nbDevoirs = $nbDevoirs["nb"];
-
-
-    //Liste de tous les étudiants des différentes classes attribuées au professeur
-    $sqlLstEtud = "select * from etudiant where classe in (select classe from classeprof where professeur='".$_SESSION["matricule"]."') order by classe;";
-    $sqlLstEtudRes = $con->query($sqlLstEtud);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +17,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!----------------------------jsGrid StyleSheet-------------------------------->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
     <link rel="stylesheet" href="./styles/style.css">
     <title>Tableau de bord - Professeur!</title>
 </head>
@@ -80,69 +56,19 @@
 
         <!----------------------------DASHBOARD BODY-------------------------------->
         <section class="dashContent">
-            <article class="stats d-flex justify-content-around  mt-3 text-white">
-                <div class="boxPr p-3 col-3 bg-success">
-                    <h6>Étudiants</h6>
-                    <h3><?php echo $nbEtudiants ."<span class='fs-6 fw-lighter text-white-50 ps-2'>  en cours</span>";?></h3>
+        <h2 class="text-center mt-5">Gestion des Devoirs</h2>
+
+            <article class="listeDevoirs mt-5 d-flex justify-content-center">
+                <div id="jsGridDevoirs">
+
                 </div>
-                <div class="boxPr p-3 col-4 bg-success">
-                    <h6>Devoirs</h6>
-                    <h3><?php echo $nbDevoirs ."<span class='fs-6 fw-lighter text-white-50 ps-2'>  en cours</span>";?></h3>
-                </div>
-                <div class="boxPr p-3 col-3 bg-success">
-                    <h6>Classes</h6>
-                    <h3><?php echo $nbClasses ."<span class='fs-6 fw-lighter text-white-50 ps-2'>  en cours</span>";?></h3>
-                </div>
-            </article>
-
-
-            <article class="lstEtudWrapper d-flex justify-content-center mt-5">
-
-                <table class="text-center mt-5" id="lstEtudiants" >
-                    <thead class="entete">
-                        <tr class="text-light">
-                            <td>Cne</td>
-                            <td>Nom</td>
-                            <td>Prénom</td>
-                            <td>E-mail</td>
-                            <td>Téléphone</td>
-                            <td>Photo</td>
-                            <td>Classe</td>
-                        </tr>
-                    </thead>
-
-                    <tbody class="fs-6">
-                        <?php
-                            if($sqlLstEtudRes->rowcount() > 0)
-                            {
-                                while($etudiants = $sqlLstEtudRes->fetch(PDO::FETCH_ASSOC))
-                                {
-                                    echo "<tr>";
-                                        echo "<td  class='p-2'>".$etudiants["cne"]."</td>";
-                                        echo "<td  class='p-2'>".$etudiants['nomEtud']."</td>";
-                                        echo "<td  class='p-2'>".$etudiants['prenomEtud']."</td>";
-                                        echo "<td  class='p-2'>".$etudiants['mailEtud']."</td>";
-                                        echo "<td  class='p-2'>".$etudiants['telEtud']."</td>";
-                                        echo "<td  class='p-2'><img class=' height='50px' width='50px' src='data:image/jpeg;base64," . base64_encode($etudiants['photoEtud']) . "'></td>";
-                                        echo "<td  class='p-2'>".$etudiants['classe']."</td>";
-                                    echo "</tr>"; 
-                                }
-                            }else
-                            {
-                                echo "<tr>";
-                                echo "<td colspan=8>Vous n'avez pas encore reçu la liste des étudiants</td>";
-                                echo "</tr>";
-
-                            }
-
-                        ?>
-                    </tbody>
-                </table>
             </article>
         </section>
     </main>
   
+    <!----------------------------jsGrid && jQuery CDN-------------------------------->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
